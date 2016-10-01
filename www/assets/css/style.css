@@ -1960,13 +1960,15 @@ label {
 /*LOCK SCREEN CONF*/
 #showtime {
 	width: 100%;
-	color: #fff;
+	color: white;
 	font-size: 90px;
 	margin-bottom: 30px;
 	margin-top: 250px;
 	display: inline-block;
 	text-align: center;
-	font-weight: 400;
+	font-weight: bold;
+
+
 }
 
 .lock-screen {
