@@ -24,7 +24,7 @@ shinyUI(fluidPage(
 
     # Show a plot of the generated distribution
     mainPanel(
-      plotOutput("distPlot")
+      includeHTML("www/map.html")
     )
   )
 ))
