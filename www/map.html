@@ -5,15 +5,21 @@
     <meta charset="utf-8" />
     <link 
         rel="stylesheet" 
-        href="http://cdn.leafletjs.com/leaflet-0.7/leaflet.css"
+        href="https://unpkg.com/leaflet@1.0.1/dist/leaflet.css"
     />
 </head>
 <body>
-    <div id="map" style="width: 600px; height: 400px"></div>
+    <div id="main">
+        <div id="mapContainer" style="height: 600px">
+            <div id="map" style="height: 600px; margin-bottom: 5px;"></div>
+            <button id="clear" onclick="clearMap()" style="margin-bottom: 5px; margin-right: 5px; position: relative; z-index: 1000;">Clear</button>
+            <button id="saveRoute" onclick="saveCurrentRoute()" style="margin-bottom: 5px; margin-right: 5px; position: relative; z-index: 1000;">Save Route</button>
+            <button id="calculateConfilcts" onclick="calculateConflicts()" style="margin-bottom: 5px; margin-right: 5px; position: relative; z-index: 1000;">Calculate Conflicts</button>
+        </div>
+    </div>
 
-    <script
-        src="http://cdn.leafletjs.com/leaflet-0.7/leaflet.js">
-    </script>
+    <script src="https://unpkg.com/leaflet@1.0.1/dist/leaflet.js"></script>
+    <script src="https://npmcdn.com/@turf/turf@3.5.1/turf.js"></script>
 
     <script>
         var map = L.map('map').setView([43.6906, -79.4176], 12);
@@ -22,8 +28,84 @@
         L.tileLayer(
             'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: 'Map data &copy; ' + mapLink,
-            maxZoom: 18,
+            maxZoom: 18
             }).addTo(map);
+        map.on('click', onMapClick);
+
+
+
+        var selectedPoints = [];
+        var markers = [];
+        var polygons = [];
+        var routes = [];
+
+        function onMapClick(e) {
+            selectedPoints.push(e.latlng);
+            var marker = L.marker(e.latlng).addTo(map);
+            markers.push(marker);
+            var length = selectedPoints.length;
+            if (length > 1) {
+                var polygon = L.polygon([selectedPoints[length - 2], selectedPoints[length - 1]]).addTo(map);
+                polygon.setStyle({
+                    color: 'blue',
+                    weight: 8
+                });
+                polygons.push(polygon);
+            }
+        }
+
+        function clearMap() {
+            selectedPoints = [];
+            markers.forEach( function(layer) {layer.remove();} );
+            polygons.forEach( function(layer) {layer.remove();} );
+            markers = [];
+            polygons = [];
+        }
+
+        function saveCurrentRoute() {
+            if (selectedPoints.length > 1) {
+                routes.push(selectedPoints);
+            }
+            clearMap();
+        }
+
+        function calculateConflicts() {
+            var currentRoute = turf.lineString(selectedPoints.map(fromLatLng));
+            var previousRoutes = routes.map(function (routePoints) {
+                return turf.lineString(routePoints.map(fromLatLng));
+            });
+            var currentRouteBuffer = turf.buffer(currentRoute, 5, 'meters');
+            var conflicts = previousRoutes.filter(function (route) {
+                var routeBuffer = turf.buffer(route, 5, 'meters');
+                var intersection = turf.intersect(routeBuffer, currentRouteBuffer);
+                if (intersection != undefined && turf.area(intersection) > 100) {
+                    return true;
+                }
+                else  {
+                    return false;
+                }
+            });
+
+            if (conflicts.length > 0) {
+                conflicts.forEach(function (route) {
+                    var polygon = L.polygon(route.geometry.coordinates.map(toLatLng)).addTo(map);
+                    polygon.setStyle({
+                        color: 'red',
+                        weight: 8
+                    });
+                    polygons.push(polygon);
+                });
+            }
+        }
+
+        function toLatLng(array) {
+            return L.latLng(array[0], array[1]);
+        }
+
+        function fromLatLng(latLng) {
+            return [latLng.lat, latLng.lng];
+        }
+
     </script>
 </body>
 </html>
