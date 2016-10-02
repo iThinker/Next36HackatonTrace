@@ -476,17 +476,15 @@
             clearMap(map);
         }
 
-        function calculateConflicts(map) {
-            var selectedStartDate = new Date("2016-10-01");
-            var selectedEndDate = new Date("2016-10-02");
-            var currentRoute = turf.lineString(map.selectedPoints.map(fromLatLng));
+        function calculateConflicts(newProject, map) {
+            var currentRoute = turf.lineString(newProject.coordinates.map(fromLatLng));
             var currentRouteBuffer = turf.buffer(currentRoute, 5, 'meters');
             var conflicts = projects.filter(function (project) {
                 var route = turf.lineString(project.coordinates.map(fromLatLng));
                 var routeBuffer = turf.buffer(route, 5, 'meters');
                 var intersection = turf.intersect(routeBuffer, currentRouteBuffer);
                 var conflictsOnArea = intersection != undefined && turf.area(intersection) > 100;
-                var conflictsOnTime = dateRangesOverlaps(selectedStartDate, selectedEndDate, project.startDate, project.endDate);
+                var conflictsOnTime = dateRangesOverlaps(newProject.startDate, newProject.endDate, project.startDate, project.endDate);
                 return conflictsOnArea && conflictsOnTime;
             });
 
@@ -522,8 +520,15 @@
         }
 
         function createProjectAction() {
-            var conflicts = calculateConflicts(creationMap);
-            displayConflicts(conflicts, creationMap);
+            var project = {
+                startDate: new Date("2016-10-01"),
+                endDate: new Date("2016-10-02"),
+                coordinates: creationMap.selectedPoints
+            };
+            var conflicts = calculateConflicts(project, creationMap);
+            if (conflicts.length > 0) {
+                displayConflicts(conflicts, creationMap);
+            }
         }
 
 
