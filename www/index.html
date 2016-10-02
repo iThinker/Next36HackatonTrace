@@ -143,7 +143,7 @@
                                 <a href="index.html#">
                                     <span class="photo"><img alt="avatar" src="assets/img/ui-divya.jpg"></span>
                                     <span class="subject">
-                                    <span class="from">Divya Manian</span>
+                                    <span class="from">Reuben Pereira</span>
                                     <span class="time">40 mins.</span>
                                     </span>
                                     <span class="message">
@@ -201,8 +201,8 @@
               <!-- sidebar menu start-->
               <ul class="sidebar-menu" id="nav-accordion">
               
-              	  <p class="centered"><a href="profile.html"><img src="assets/img/ui-sam.jpg" class="img-circle" width="60"></a></p>
-              	  <h5 class="centered">Marcel Newman</h5>
+              	  <p class="centered"><a href="profile.html"></a></p>
+              	  <h5 class="centered">Ensures that there are no scheduling conflicts with <br>other events or activities.</h5>
               	  	
                   <li class="mt">
                       <a class="active" href="index.html">
@@ -332,182 +332,113 @@
                   
                       
                       <div class="row mt">
-                      <!-- SERVER STATUS PANELS -->
-                      	<div class="col-md-4 col-sm-4 mb">
-                      		<div class="white-panel pn donut-chart">
-                      			<div class="white-header">
-						  			<h5>SERVER LOAD</h5>
-                      			</div>
-								<div class="row">
-									<div class="col-sm-6 col-xs-6 goleft">
-										<p><i class="fa fa-database"></i> 70%</p>
-									</div>
-	                      		</div>
-								<canvas id="serverstatus01" height="120" width="120"></canvas>
-								<script>
-									var doughnutData = [
-											{
-												value: 70,
-												color:"#68dff0"
-											},
-											{
-												value : 30,
-												color : "#fdfdfd"
-											}
-										];
-										var myDoughnut = new Chart(document.getElementById("serverstatus01").getContext("2d")).Doughnut(doughnutData);
-								</script>
-	                      	</div><! --/grey-panel -->
-                      	</div><!-- /col-md-4-->
-                      	
+                                         	
 
-                      	<div class="col-md-4 col-sm-4 mb">
-                      		<div class="white-panel pn">
-                      			<div class="white-header">
-						  			<h5>TOP PRODUCT</h5>
-                      			</div>
-								<div class="row">
-									<div class="col-sm-6 col-xs-6 goleft">
-										<p><i class="fa fa-heart"></i> 122</p>
-									</div>
-									<div class="col-sm-6 col-xs-6"></div>
-	                      		</div>
-	                      		<div class="centered">
-										<img src="assets/img/product.png" width="120">
-	                      		</div>
-                      		</div>
-                      	</div><!-- /col-md-4 -->
-                      	
-						<div class="col-md-4 mb">
-							<!-- WHITE PANEL - TOP USER -->
-							<div class="white-panel pn">
-								<div class="white-header">
-									<h5>TOP USER</h5>
-								</div>
-								<p><img src="assets/img/ui-zac.jpg" class="img-circle" width="80"></p>
-								<p><b>Zac Snider</b></p>
-								<div class="row">
-									<div class="col-md-6">
-										<p class="small mt">MEMBER SINCE</p>
-										<p>2012</p>
-									</div>
-									<div class="col-md-6">
-										<p class="small mt">TOTAL SPEND</p>
-										<p>$ 47,60</p>
-									</div>
-								</div>
-							</div>
-						</div><!-- /col-md-4 -->
+              <div class="row mt mb">
+                  <div class="col-md-12">
+                      <section class="task-panel tasks-widget">
+                    <div class="panel-heading">
+                          <div class="pull-left"><h5><i class="fa fa-tasks"></i> Ongoing projects</h5></div>
+                          <br>
+                    </div>
+                          <div class="panel-body">
+                              <div class="task-content">
+                                  <ul id="sortable" class="task-list">
+                                      <li class="list-primary">
+                                          <i class=" fa fa-ellipsis-v"></i>
+                                          <div class="task-checkbox">
+                                              <input type="checkbox" class="list-child" value=""  />
+                                          </div>
+                                          <div class="task-title">
+                                              <span class="task-title-sp">Trace - Admin Panel Theme</span>
+                                              <span class="badge bg-theme">Done</span>
+                                              <div class="pull-right hidden-phone">
+                                                  <button class="btn btn-success btn-xs fa fa-check"></button>
+                                                  <button class="btn btn-primary btn-xs fa fa-pencil"></button>
+                                                  <button class="btn btn-danger btn-xs fa fa-trash-o"></button>
+                                              </div>
+                                          </div>
+                                      </li>
+
+                                      <li class="list-danger">
+                                          <i class=" fa fa-ellipsis-v"></i>
+                                          <div class="task-checkbox">
+                                              <input type="checkbox" class="list-child" value=""  />
+                                          </div>
+                                          <div class="task-title">
+                                              <span class="task-title-sp">Extensive collection of plugins</span>
+                                              <span class="badge bg-warning">Cool</span>
+                                              <div class="pull-right hidden-phone">
+                                                  <button class="btn btn-success btn-xs fa fa-check"></button>
+                                                  <button class="btn btn-primary btn-xs fa fa-pencil"></button>
+                                                  <button class="btn btn-danger btn-xs fa fa-trash-o"></button>
+                                              </div>
+                                          </div>
+                                      </li>
+                                      <li class="list-success">
+                                          <i class=" fa fa-ellipsis-v"></i>
+                                          <div class="task-checkbox">
+                                              <input type="checkbox" class="list-child" value=""  />
+                                          </div>
+                                          <div class="task-title">
+                                              <span class="task-title-sp">Free updates always, no extra fees.</span>
+                                              <span class="badge bg-success">2 Days</span>
+                                              <div class="pull-right hidden-phone">
+                                                  <button class="btn btn-success btn-xs fa fa-check"></button>
+                                                  <button class="btn btn-primary btn-xs fa fa-pencil"></button>
+                                                  <button class="btn btn-danger btn-xs fa fa-trash-o"></button>
+                                              </div>
+                                          </div>
+                                      </li>
+                                      <li class="list-warning">
+                                          <i class=" fa fa-ellipsis-v"></i>
+                                          <div class="task-checkbox">
+                                              <input type="checkbox" class="list-child" value=""  />
+                                          </div>
+                                          <div class="task-title">
+                                              <span class="task-title-sp">More features coming soon</span>
+                                              <span class="badge bg-info">Tomorrow</span>
+                                              <div class="pull-right hidden-phone">
+                                                  <button class="btn btn-success btn-xs fa fa-check"></button>
+                                                  <button class="btn btn-primary btn-xs fa fa-pencil"></button>
+                                                  <button class="btn btn-danger btn-xs fa fa-trash-o"></button>
+                                              </div>
+                                          </div>
+                                      </li>
+                                      <li class="list-info">
+                                          <i class=" fa fa-ellipsis-v"></i>
+                                          <div class="task-checkbox">
+                                              <input type="checkbox" class="list-child" value=""  />
+                                          </div>
+                                          <div class="task-title">
+                                              <span class="task-title-sp">Hey, seriously, you should buy this Dashboard</span>
+                                              <span class="badge bg-important">Now</span>
+                                              <div class="pull-right hidden-phone">
+                                                  <button class="btn btn-success btn-xs fa fa-check"></button>
+                                                  <button class="btn btn-primary btn-xs fa fa-pencil"></button>
+                                                  <button class="btn btn-danger btn-xs fa fa-trash-o"></button>
+                                              </div>
+                                          </div>
+                                      </li>
+
+                                  </ul>
+                              </div>
+                              <div class=" add-task-row">
+                                  <a class="btn btn-success btn-sm pull-left" href="todo_list.html#">Add New Tasks</a>
+                                  <a class="btn btn-default btn-sm pull-right" href="todo_list.html#">See All Tasks</a>
+                              </div>
+                          </div>
+                      </section>
+                  </div><!--/col-md-12 -->
+              </div><!-- /row -->
+
                       	
 
                     </div><!-- /row -->
                     
-                    				
-					<div class="row">
-						<!-- TWITTER PANEL -->
-						<div class="col-md-4 mb">
-                      		<div class="darkblue-panel pn">
-                      			<div class="darkblue-header">
-						  			<h5>DROPBOX STATICS</h5>
-                      			</div>
-								<canvas id="serverstatus02" height="120" width="120"></canvas>
-								<script>
-									var doughnutData = [
-											{
-												value: 60,
-												color:"#68dff0"
-											},
-											{
-												value : 40,
-												color : "#444c57"
-											}
-										];
-										var myDoughnut = new Chart(document.getElementById("serverstatus02").getContext("2d")).Doughnut(doughnutData);
-								</script>
-								<p>April 17, 2014</p>
-								<footer>
-									<div class="pull-left">
-										<h5><i class="fa fa-hdd-o"></i> 17 GB</h5>
-									</div>
-									<div class="pull-right">
-										<h5>60% Used</h5>
-									</div>
-								</footer>
-                      		</div><! -- /darkblue panel -->
-						</div><!-- /col-md-4 -->
-						
-						
-						<div class="col-md-4 mb">
-							<!-- INSTAGRAM PANEL -->
-							<div class="instagram-panel pn">
-								<i class="fa fa-instagram fa-4x"></i>
-								<p>@THISISYOU<br/>
-									5 min. ago
-								</p>
-								<p><i class="fa fa-comment"></i> 18 | <i class="fa fa-heart"></i> 49</p>
-							</div>
-						</div><!-- /col-md-4 -->
-						
-						<div class="col-md-4 col-sm-4 mb">
-							<!-- REVENUE PANEL -->
-							<div class="darkblue-panel pn">
-								<div class="darkblue-header">
-									<h5>REVENUE</h5>
-								</div>
-								<div class="chart mt">
-									<div class="sparkline" data-type="line" data-resize="true" data-height="75" data-width="90%" data-line-width="1" data-line-color="#fff" data-spot-color="#fff" data-fill-color="" data-highlight-line-color="#fff" data-spot-radius="4" data-data="[200,135,667,333,526,996,564,123,890,464,655]"></div>
-								</div>
-								<p class="mt"><b>$ 17,980</b><br/>Month Income</p>
-							</div>
-						</div><!-- /col-md-4 -->
-						
-					</div><!-- /row -->
+
 					
-					<div class="row mt">
-                      <!--CUSTOM CHART START -->
-                      <div class="border-head">
-                          <h3>VISITS</h3>
-                      </div>
-                      <div class="custom-bar-chart">
-                          <ul class="y-axis">
-                              <li><span>10.000</span></li>
-                              <li><span>8.000</span></li>
-                              <li><span>6.000</span></li>
-                              <li><span>4.000</span></li>
-                              <li><span>2.000</span></li>
-                              <li><span>0</span></li>
-                          </ul>
-                          <div class="bar">
-                              <div class="title">JAN</div>
-                              <div class="value tooltips" data-original-title="8.500" data-toggle="tooltip" data-placement="top">85%</div>
-                          </div>
-                          <div class="bar ">
-                              <div class="title">FEB</div>
-                              <div class="value tooltips" data-original-title="5.000" data-toggle="tooltip" data-placement="top">50%</div>
-                          </div>
-                          <div class="bar ">
-                              <div class="title">MAR</div>
-                              <div class="value tooltips" data-original-title="6.000" data-toggle="tooltip" data-placement="top">60%</div>
-                          </div>
-                          <div class="bar ">
-                              <div class="title">APR</div>
-                              <div class="value tooltips" data-original-title="4.500" data-toggle="tooltip" data-placement="top">45%</div>
-                          </div>
-                          <div class="bar">
-                              <div class="title">MAY</div>
-                              <div class="value tooltips" data-original-title="3.200" data-toggle="tooltip" data-placement="top">32%</div>
-                          </div>
-                          <div class="bar ">
-                              <div class="title">JUN</div>
-                              <div class="value tooltips" data-original-title="6.200" data-toggle="tooltip" data-placement="top">62%</div>
-                          </div>
-                          <div class="bar">
-                              <div class="title">JUL</div>
-                              <div class="value tooltips" data-original-title="7.500" data-toggle="tooltip" data-placement="top">75%</div>
-                          </div>
-                      </div>
-                      <!--custom chart end-->
-					</div><!-- /row -->	
+
 					
                   </div><!-- /col-lg-9 END SECTION MIDDLE -->
                   
@@ -527,7 +458,7 @@
                       	</div>
                       	<div class="details">
                       		<p><muted>2 Minutes Ago</muted><br/>
-                      		   <a href="#">James Brown</a> subscribed to your newsletter.<br/>
+                      		   <a href="#">James Brown</a> subscribed to your events.<br/>
                       		</p>
                       	</div>
                       </div>
@@ -542,39 +473,7 @@
                       		</p>
                       	</div>
                       </div>
-                      <!-- Third Action -->
-                      <div class="desc">
-                      	<div class="thumb">
-                      		<span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>
-                      	</div>
-                      	<div class="details">
-                      		<p><muted>7 Hours Ago</muted><br/>
-                      		   <a href="#">Brandon Page</a> purchased a year subscription.<br/>
-                      		</p>
-                      	</div>
-                      </div>
-                      <!-- Fourth Action -->
-                      <div class="desc">
-                      	<div class="thumb">
-                      		<span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>
-                      	</div>
-                      	<div class="details">
-                      		<p><muted>11 Hours Ago</muted><br/>
-                      		   <a href="#">Mark Twain</a> commented your post.<br/>
-                      		</p>
-                      	</div>
-                      </div>
-                      <!-- Fifth Action -->
-                      <div class="desc">
-                      	<div class="thumb">
-                      		<span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>
-                      	</div>
-                      	<div class="details">
-                      		<p><muted>18 Hours Ago</muted><br/>
-                      		   <a href="#">Daniel Pratt</a> purchased a wallet in your store.<br/>
-                      		</p>
-                      	</div>
-                      </div>
+                        
 
                        <!-- USERS ONLINE SECTION -->
 						<h3>TEAM MEMBERS</h3>
@@ -584,7 +483,7 @@
                       		<img class="img-circle" src="assets/img/ui-divya.jpg" width="35px" height="35px" align="">
                       	</div>
                       	<div class="details">
-                      		<p><a href="#">DIVYA MANIAN</a><br/>
+                      		<p><a href="#">Reuben Pereira</a><br/>
                       		   <muted>Available</muted>
                       		</p>
                       	</div>
@@ -595,7 +494,7 @@
                       		<img class="img-circle" src="assets/img/ui-sherman.jpg" width="35px" height="35px" align="">
                       	</div>
                       	<div class="details">
-                      		<p><a href="#">DJ SHERMAN</a><br/>
+                      		<p><a href="#">Roman Temchenko</a><br/>
                       		   <muted>I am Busy</muted>
                       		</p>
                       	</div>
@@ -606,33 +505,12 @@
                       		<img class="img-circle" src="assets/img/ui-danro.jpg" width="35px" height="35px" align="">
                       	</div>
                       	<div class="details">
-                      		<p><a href="#">DAN ROGERS</a><br/>
+                      		<p><a href="#">Oleksandr Dzyuba</a><br/>
                       		   <muted>Available</muted>
                       		</p>
                       	</div>
                       </div>
-                      <!-- Fourth Member -->
-                      <div class="desc">
-                      	<div class="thumb">
-                      		<img class="img-circle" src="assets/img/ui-zac.jpg" width="35px" height="35px" align="">
-                      	</div>
-                      	<div class="details">
-                      		<p><a href="#">Zac Sniders</a><br/>
-                      		   <muted>Available</muted>
-                      		</p>
-                      	</div>
-                      </div>
-                      <!-- Fifth Member -->
-                      <div class="desc">
-                      	<div class="thumb">
-                      		<img class="img-circle" src="assets/img/ui-sam.jpg" width="35px" height="35px" align="">
-                      	</div>
-                      	<div class="details">
-                      		<p><a href="#">Marcel Newman</a><br/>
-                      		   <muted>Available</muted>
-                      		</p>
-                      	</div>
-                      </div>
+
 
                         <!-- CALENDAR-->
                         <div id="calendar" class="mb">
@@ -657,7 +535,7 @@
       <!--footer start-->
       <footer class="site-footer">
           <div class="text-center">
-              2014 - Alvarez.is
+              2016 - Trace
               <a href="index.html#" class="go-top">
                   <i class="fa fa-angle-up"></i>
               </a>
@@ -681,6 +559,32 @@
     
     <script type="text/javascript" src="assets/js/gritter/js/jquery.gritter.js"></script>
     <script type="text/javascript" src="assets/js/gritter-conf.js"></script>
+
+   <!--script for this page-->
+  <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>    
+    <script src="assets/js/tasks.js" type="text/javascript"></script>
+
+    <script>
+      jQuery(document).ready(function() {
+          TaskList.initTaskWidget();
+      });
+
+      $(function() {
+          $( "#sortable" ).sortable();
+          $( "#sortable" ).disableSelection();
+      });
+
+    </script>
+    
+    
+  <script>
+      //custom select box
+
+      $(function(){
+          $('select.styled').customSelect();
+      });
+
+  </script>
 
     <!--script for this page-->
     <script src="assets/js/sparkline-chart.js"></script>    
