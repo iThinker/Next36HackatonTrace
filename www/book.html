@@ -347,7 +347,7 @@
                           </div>
 
 
-                          <button type="submit" class="btn btn-theme">Apply</button>
+                          <button type="button" onclick="createProjectAction()"  class="btn btn-theme">Apply</button>
 
                       </form>
 
@@ -551,12 +551,14 @@
             if (conflicts.length > 0) {
                 tmpProject = project;
                 displayConflicts(conflicts, creationMap);
+                document.getElementById('disable').click(); document.getElementById('enable').click();
             }
             else {
                 projectIdCounter++;
                 projects.push(project);
                 clearMap(creationMap);
                 clearForm();
+                alert("Project Created Succesfully");
             }
         }
 
