@@ -7,20 +7,18 @@
     <meta name="author" content="Dashboard">
     <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
 
-    <title>Trace - Bootstrap Admin Template</title>
+    <title>DASHGUM - Bootstrap Admin Template</title>
 
     <!-- Bootstrap core CSS -->
     <link href="assets/css/bootstrap.css" rel="stylesheet">
     <!--external css-->
     <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="assets/js/bootstrap-datepicker/css/datepicker.css" />
+    <link rel="stylesheet" type="text/css" href="assets/js/bootstrap-daterangepicker/daterangepicker.css" />
         
     <!-- Custom styles for this template -->
     <link href="assets/css/style.css" rel="stylesheet">
     <link href="assets/css/style-responsive.css" rel="stylesheet">
-    <link 
-        rel="stylesheet" 
-        href="https://unpkg.com/leaflet@1.0.1/dist/leaflet.css"
-    />
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -41,7 +39,7 @@
                   <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
               </div>
             <!--logo start-->
-            <a href="index.html" class="logo"><b>Trace FREE</b></a>
+            <a href="index.html" class="logo"><b>DASHGUM FREE</b></a>
             <!--logo end-->
             <div class="nav notify-row" id="top_menu">
                 <!--  notification start -->
@@ -60,7 +58,7 @@
                             <li>
                                 <a href="index.html#">
                                     <div class="task-info">
-                                        <div class="desc">Trace Admin Panel</div>
+                                        <div class="desc">DashGum Admin Panel</div>
                                         <div class="percent">40%</div>
                                     </div>
                                     <div class="progress progress-striped">
@@ -198,12 +196,11 @@
       <aside>
           <div id="sidebar"  class="nav-collapse ">
               <!-- sidebar menu start-->
-              <!-- sidebar menu start-->
               <ul class="sidebar-menu" id="nav-accordion">
               
-                  <p class="centered"><a href="profile.html"></a></p>
-                  <h5 class="centered">Ensures that there are no scheduling conflicts with <br>other events or activities.</h5>
-                    
+              	  <p class="centered"><a href="profile.html"><img src="assets/img/ui-sam.jpg" class="img-circle" width="60"></a></p>
+              	  <h5 class="centered">Marcel Newman</h5>
+              	  	
                   <li class="mt">
                       <a href="index.html">
                           <i class="fa fa-dashboard"></i>
@@ -211,16 +208,47 @@
                       </a>
                   </li>
 
-                  
                   <li class="sub-menu">
-                      <a class="active" href="javascript:;" >
-                          <i class="fa fa-cogs"></i>
-                          <span>Booking</span>
+                      <a href="javascript:;" >
+                          <i class="fa fa-desktop"></i>
+                          <span>UI Elements</span>
                       </a>
                       <ul class="sub">
-                          <li class="active"><a  href="book.html">Input Data</a></li>
-                          <li><a  href="book.html">Check Availability</a></li>
-                          <li><a  href="book.html">Book the road</a></li>
+                          <li><a  href="general.html">General</a></li>
+                          <li><a  href="buttons.html">Buttons</a></li>
+                          <li><a  href="panels.html">Panels</a></li>
+                      </ul>
+                  </li>
+
+                  <li class="sub-menu">
+                      <a href="javascript:;" >
+                          <i class="fa fa-cogs"></i>
+                          <span>Components</span>
+                      </a>
+                      <ul class="sub">
+                          <li><a  href="calendar.html">Calendar</a></li>
+                          <li><a  href="gallery.html">Gallery</a></li>
+                          <li><a  href="todo_list.html">Todo List</a></li>
+                      </ul>
+                  </li>
+                  <li class="sub-menu">
+                      <a href="javascript:;" >
+                          <i class="fa fa-book"></i>
+                          <span>Extra Pages</span>
+                      </a>
+                      <ul class="sub">
+                          <li><a  href="blank.html">Blank Page</a></li>
+                          <li><a  href="login.html">Login</a></li>
+                          <li><a  href="lock_screen.html">Lock Screen</a></li>
+                      </ul>
+                  </li>
+                  <li class="sub-menu">
+                      <a class="active" href="javascript:;" >
+                          <i class="fa fa-tasks"></i>
+                          <span>Forms</span>
+                      </a>
+                      <ul class="sub">
+                          <li class="active"><a  href="form_component.html">Form Components</a></li>
                       </ul>
                   </li>
                   <li class="sub-menu">
@@ -230,21 +258,9 @@
                       </a>
                       <ul class="sub">
                           <li><a  href="basic_table.html">Basic Table</a></li>
+                          <li><a  href="responsive_table.html">Responsive Table</a></li>
                       </ul>
                   </li>
-                  
-                  <li class="sub-menu">
-                      <a href="javascript:;" >
-                          <i class="fa fa-book"></i>
-                          <span>Extra Pages</span>
-                      </a>
-                      <ul class="sub">
-                          <li><a  href="lock_screen.html">Lock Screen</a></li>
-                 
-                          <li><a  href="blank.html">Team</a></li>
-                      </ul>
-                  </li>
-
                   <li class="sub-menu">
                       <a href="javascript:;" >
                           <i class=" fa fa-bar-chart-o"></i>
@@ -252,11 +268,11 @@
                       </a>
                       <ul class="sub">
                           <li><a  href="morris.html">Morris</a></li>
+                          <li><a  href="chartjs.html">Chartjs</a></li>
                       </ul>
                   </li>
 
               </ul>
-              <!-- sidebar menu end-->
               <!-- sidebar menu end-->
           </div>
       </aside>
@@ -272,10 +288,9 @@
           	
           	<!-- BASIC FORM ELELEMNTS -->
           	<div class="row mt">
-            <div class="col-lg-4">
+          		<div class="col-lg-4">
                   <div class="form-panel">
-
-<h4 class="mb"><i class="fa fa-angle-right"></i> Form Elements</h4>
+                  	  <h4 class="mb"><i class="fa fa-angle-right"></i> Form Elements</h4>
                       <form class="form-horizontal style-form" method="get">
                           <div class="form-group">
                               <label class="col-sm-2 col-sm-2 control-label">Default</label>
@@ -327,175 +342,10 @@
                               </div>
                           </div>
                       </form>
-
-            </div>
-            </div>      
-          		<div class="col-lg-8">
-                  <div class="form-panel">
-
-
-<div id="mapContainer" style="height: 600px">
-            <div id="map" style="height: 600px; margin-bottom: 5px;"></div>
-            <button id="clear" onclick="clearMap(creationMap)" style="margin-bottom: 5px; margin-right: 5px; position: relative; z-index: 1000;">Clear</button>
-            <button id="saveRoute" onclick="saveCurrentRoute(creationMap)" style="margin-bottom: 5px; margin-right: 5px; position: relative; z-index: 1000;">Save Route</button>
-            <button id="calculateConfilcts" onclick="calculateConflicts(creationMap)" style="margin-bottom: 5px; margin-right: 5px; position: relative; z-index: 1000;">Calculate Conflicts</button>
-        </div>
-
-
                   </div>
           		</div><!-- col-lg-12-->      	
           	</div><!-- /row -->
           	
-    <script src="https://unpkg.com/leaflet@1.0.1/dist/leaflet.js"></script>
-    <script src="https://npmcdn.com/@turf/turf@3.5.1/turf.min.js"></script>
-
-    <script>
-        var creationMap = L.map('map').setView([43.6906, -79.4176], 16);
-        creationMap.selectedPoints = [];
-        creationMap.markers = [];
-        creationMap.polylines = [];
-
-        var projects = [{
-            id: "TH999997",
-            startDate: new Date("2016-10-01"),
-            endDate: new Date("2016-12-19"),
-            company: "Toronto Hydro",
-            type: "Electrical",
-            impact: "major",
-            manager: "John Peng",
-            description: "Repair cable chamber.",
-            coordinates: [
-                {
-                    "lat": 43.69194839031993,
-                    "lng": -79.42185044288637
-                },
-                {
-                    "lat": 43.69235178611565,
-                    "lng": -79.41968321800233
-                },
-                {
-                    "lat": 43.69251469518709,
-                    "lng": -79.41932916641237
-                },
-                {
-                    "lat": 43.692980147238465,
-                    "lng": -79.41702246665956
-                }
-            ]
-        },
-            {
-            id: "BM999998",
-            startDate: new Date("2016-08-02"),
-            endDate: new Date("2016-08-17"),
-            company: "Bell Mobility",
-            type: "Construction",
-            impact: "minor",
-            manager: "Simon Cheng",
-            description: "Replace deteriorating wood pole with concrete pole.",
-            coordinates: [
-                {
-                    "lat": 43.69194839031993,
-                    "lng": -79.42185044288637
-                },
-                {
-                    "lat": 43.69235178611565,
-                    "lng": -79.41968321800233
-                },
-                {
-                    "lat": 43.69251469518709,
-                    "lng": -79.41932916641237
-                },
-                {
-                    "lat": 43.692980147238465,
-                    "lng": -79.41702246665956
-                }
-            ]
-        }
-        ];
-
-        mapLink = 
-            '<a href="http://openstreetmap.org">OpenStreetMap</a>';
-        L.tileLayer(
-            'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: 'Map data &copy; ' + mapLink,
-            maxZoom: 18
-            }).addTo(creationMap);
-        creationMap.on('click', onMapClick);
-
-
-        function onMapClick(e) {
-            var map = e.target;
-            map.selectedPoints.push(e.latlng);
-            var marker = L.marker(e.latlng).addTo(map);
-            map.markers.push(marker);
-            var length = map.selectedPoints.length;
-            if (length > 1) {
-                var polyline = L.polyline([map.selectedPoints[length - 2], map.selectedPoints[length - 1]]).addTo(map);
-                polyline.setStyle({
-                    color: 'blue',
-                    weight: 8
-                });
-                map.polylines.push(polyline);
-            }
-        }
-
-        function clearMap(map) {
-            map.selectedPoints = [];
-            map.markers.forEach( function(layer) {layer.remove();} );
-            map.polylines.forEach( function(layer) {layer.remove();} );
-            map.markers = [];
-            map.polylines = [];
-        }
-
-        function saveCurrentRoute(map) {
-            if (map.selectedPoints.length > 1) {
-                projects.push({coordinates: map.selectedPoints});
-            }
-            clearMap(map);
-        }
-
-        function calculateConflicts(map) {
-            var currentRoute = turf.lineString(map.selectedPoints.map(fromLatLng));
-            var currentRouteBuffer = turf.buffer(currentRoute, 5, 'meters');
-            var conflicts = projects.filter(function (project) {
-                var route = turf.lineString(project.coordinates.map(fromLatLng));
-                var routeBuffer = turf.buffer(route, 5, 'meters');
-                var intersection = turf.intersect(routeBuffer, currentRouteBuffer);
-                if (intersection != undefined && turf.area(intersection) > 100) {
-                    return true;
-                }
-                else  {
-                    return false;
-                }
-            });
-
-            if (conflicts.length > 0) {
-                conflicts.forEach(function (project) {
-                    var polyline = L.polyline(project.coordinates).addTo(map);
-                    polyline.setStyle({
-                        color: 'red',
-                        weight: 8
-                    });
-                     map.polylines.push(polyline);
-                });
-            }
-        }
-
-        function toLatLng(array) {
-            return L.latLng(array[0], array[1]);
-        }
-
-        function fromLatLng(latLng) {
-            return [latLng.lat, latLng.lng];
-        }
-
-
-
-
-    </script>
-
-
-
           	<!-- INLINE FORM ELELEMNTS -->
           	<div class="row mt">
           		<div class="col-lg-12">
@@ -678,6 +528,10 @@
 	<script src="assets/js/jquery.tagsinput.js"></script>
 	
 	<!--custom checkbox & radio-->
+	
+	<script type="text/javascript" src="assets/js/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+	<script type="text/javascript" src="assets/js/bootstrap-daterangepicker/date.js"></script>
+	<script type="text/javascript" src="assets/js/bootstrap-daterangepicker/daterangepicker.js"></script>
 	
 	<script type="text/javascript" src="assets/js/bootstrap-inputmask/bootstrap-inputmask.min.js"></script>
 	
