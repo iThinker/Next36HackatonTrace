@@ -416,11 +416,9 @@
 
         function calculateConflicts(map) {
             var currentRoute = turf.lineString(map.selectedPoints.map(fromLatLng));
-            var previousRoutes = projects.map(function (project) {
-                return turf.lineString(project.coordinates.map(fromLatLng));
-            });
             var currentRouteBuffer = turf.buffer(currentRoute, 5, 'meters');
-            var conflicts = previousRoutes.filter(function (route) {
+            var conflicts = projects.filter(function (project) {
+                var route = turf.lineString(project.coordinates.map(fromLatLng));
                 var routeBuffer = turf.buffer(route, 5, 'meters');
                 var intersection = turf.intersect(routeBuffer, currentRouteBuffer);
                 if (intersection != undefined && turf.area(intersection) > 100) {
@@ -432,8 +430,8 @@
             });
 
             if (conflicts.length > 0) {
-                conflicts.forEach(function (route) {
-                    var polyline = L.polyline(route.geometry.coordinates.map(toLatLng)).addTo(map);
+                conflicts.forEach(function (project) {
+                    var polyline = L.polyline(project.coordinates).addTo(map);
                     polyline.setStyle({
                         color: 'red',
                         weight: 8
