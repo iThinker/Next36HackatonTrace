@@ -13,8 +13,6 @@
     <link href="assets/css/bootstrap.css" rel="stylesheet">
     <!--external css-->
     <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" href="assets/js/bootstrap-datepicker/css/datepicker.css" />
-    <link rel="stylesheet" type="text/css" href="assets/js/bootstrap-daterangepicker/daterangepicker.css" />
         
     <!-- Custom styles for this template -->
     <link href="assets/css/style.css" rel="stylesheet">
@@ -298,9 +296,9 @@
 
 <div id="mapContainer" style="height: 600px">
             <div id="map" style="height: 600px; margin-bottom: 5px;"></div>
-            <button id="clear" onclick="clearMap()" style="margin-bottom: 5px; margin-right: 5px; position: relative; z-index: 1000;">Clear</button>
-            <button id="saveRoute" onclick="saveCurrentRoute()" style="margin-bottom: 5px; margin-right: 5px; position: relative; z-index: 1000;">Save Route</button>
-            <button id="calculateConfilcts" onclick="calculateConflicts()" style="margin-bottom: 5px; margin-right: 5px; position: relative; z-index: 1000;">Calculate Conflicts</button>
+            <button id="clear" onclick="clearMap(creationMap)" style="margin-bottom: 5px; margin-right: 5px; position: relative; z-index: 1000;">Clear</button>
+            <button id="saveRoute" onclick="saveCurrentRoute(creationMap)" style="margin-bottom: 5px; margin-right: 5px; position: relative; z-index: 1000;">Save Route</button>
+            <button id="calculateConfilcts" onclick="calculateConflicts(creationMap)" style="margin-bottom: 5px; margin-right: 5px; position: relative; z-index: 1000;">Calculate Conflicts</button>
         </div>
 
 
@@ -312,55 +310,55 @@
     <script src="https://npmcdn.com/@turf/turf@3.5.1/turf.min.js"></script>
 
     <script>
-        var map = L.map('map').setView([43.6906, -79.4176], 12);
+        var creationMap = L.map('map').setView([43.6906, -79.4176], 12);
+        creationMap.selectedPoints = [];
+        creationMap.markers = [];
+        creationMap.polylines = [];
+        routes = [];
+
         mapLink = 
             '<a href="http://openstreetmap.org">OpenStreetMap</a>';
         L.tileLayer(
             'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: 'Map data &copy; ' + mapLink,
             maxZoom: 18
-            }).addTo(map);
-        map.on('click', onMapClick);
+            }).addTo(creationMap);
+        creationMap.on('click', onMapClick);
 
-
-
-        var selectedPoints = [];
-        var markers = [];
-        var polygons = [];
-        var routes = [];
 
         function onMapClick(e) {
-            selectedPoints.push(e.latlng);
+            var map = e.target;
+            map.selectedPoints.push(e.latlng);
             var marker = L.marker(e.latlng).addTo(map);
-            markers.push(marker);
-            var length = selectedPoints.length;
+            map.markers.push(marker);
+            var length = map.selectedPoints.length;
             if (length > 1) {
-                var polygon = L.polygon([selectedPoints[length - 2], selectedPoints[length - 1]]).addTo(map);
-                polygon.setStyle({
+                var polyline = L.polyline([map.selectedPoints[length - 2], map.selectedPoints[length - 1]]).addTo(map);
+                polyline.setStyle({
                     color: 'blue',
                     weight: 8
                 });
-                polygons.push(polygon);
+                map.polylines.push(polyline);
             }
         }
 
-        function clearMap() {
-            selectedPoints = [];
-            markers.forEach( function(layer) {layer.remove();} );
-            polygons.forEach( function(layer) {layer.remove();} );
-            markers = [];
-            polygons = [];
+        function clearMap(map) {
+            map.selectedPoints = [];
+            map.markers.forEach( function(layer) {layer.remove();} );
+            map.polylines.forEach( function(layer) {layer.remove();} );
+            map.markers = [];
+            map.polylines = [];
         }
 
-        function saveCurrentRoute() {
-            if (selectedPoints.length > 1) {
-                routes.push(selectedPoints);
+        function saveCurrentRoute(map) {
+            if (map.selectedPoints.length > 1) {
+                routes.push(map.selectedPoints);
             }
-            clearMap();
+            clearMap(map);
         }
 
-        function calculateConflicts() {
-            var currentRoute = turf.lineString(selectedPoints.map(fromLatLng));
+        function calculateConflicts(map) {
+            var currentRoute = turf.lineString(map.selectedPoints.map(fromLatLng));
             var previousRoutes = routes.map(function (routePoints) {
                 return turf.lineString(routePoints.map(fromLatLng));
             });
@@ -378,12 +376,12 @@
 
             if (conflicts.length > 0) {
                 conflicts.forEach(function (route) {
-                    var polygon = L.polygon(route.geometry.coordinates.map(toLatLng)).addTo(map);
-                    polygon.setStyle({
+                    var polyline = L.polyline(route.geometry.coordinates.map(toLatLng)).addTo(map);
+                    polyline.setStyle({
                         color: 'red',
                         weight: 8
                     });
-                    polygons.push(polygon);
+                     map.polylines.push(polyline);
                 });
             }
         }
@@ -579,10 +577,6 @@
 	<script src="assets/js/jquery.tagsinput.js"></script>
 	
 	<!--custom checkbox & radio-->
-	
-	<script type="text/javascript" src="assets/js/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
-	<script type="text/javascript" src="assets/js/bootstrap-daterangepicker/date.js"></script>
-	<script type="text/javascript" src="assets/js/bootstrap-daterangepicker/daterangepicker.js"></script>
 	
 	<script type="text/javascript" src="assets/js/bootstrap-inputmask/bootstrap-inputmask.min.js"></script>
 	
