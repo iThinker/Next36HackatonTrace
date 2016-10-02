@@ -19,6 +19,10 @@
     <!-- Custom styles for this template -->
     <link href="assets/css/style.css" rel="stylesheet">
     <link href="assets/css/style-responsive.css" rel="stylesheet">
+    <link 
+        rel="stylesheet" 
+        href="https://unpkg.com/leaflet@1.0.1/dist/leaflet.css"
+    />
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -290,62 +294,109 @@
           	<div class="row mt">
           		<div class="col-lg-12">
                   <div class="form-panel">
-                  	  <h4 class="mb"><i class="fa fa-angle-right"></i> Form Elements</h4>
-                      <form class="form-horizontal style-form" method="get">
-                          <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Default</label>
-                              <div class="col-sm-10">
-                                  <input type="text" class="form-control">
-                              </div>
-                          </div>
-                          <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Help text</label>
-                              <div class="col-sm-10">
-                                  <input type="text" class="form-control">
-                                  <span class="help-block">A block of help text that breaks onto a new line and may extend beyond one line.</span>
-                              </div>
-                          </div>
-                          <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Rounder</label>
-                              <div class="col-sm-10">
-                                  <input type="text" class="form-control round-form">
-                              </div>
-                          </div>
-                          <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Input focus</label>
-                              <div class="col-sm-10">
-                                  <input class="form-control" id="focusedInput" type="text" value="This is focused...">
-                              </div>
-                          </div>
-                          <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Disabled</label>
-                              <div class="col-sm-10">
-                                  <input class="form-control" id="disabledInput" type="text" placeholder="Disabled input here..." disabled>
-                              </div>
-                          </div>
-                          <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Placeholder</label>
-                              <div class="col-sm-10">
-                                  <input type="text"  class="form-control" placeholder="placeholder">
-                              </div>
-                          </div>
-                          <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Password</label>
-                              <div class="col-sm-10">
-                                  <input type="password"  class="form-control" placeholder="">
-                              </div>
-                          </div>
-                          <div class="form-group">
-                              <label class="col-lg-2 col-sm-2 control-label">Static control</label>
-                              <div class="col-lg-10">
-                                  <p class="form-control-static">email@example.com</p>
-                              </div>
-                          </div>
-                      </form>
+
+
+<div id="mapContainer" style="height: 600px">
+            <div id="map" style="height: 600px; margin-bottom: 5px;"></div>
+            <button id="clear" onclick="clearMap()" style="margin-bottom: 5px; margin-right: 5px; position: relative; z-index: 1000;">Clear</button>
+            <button id="saveRoute" onclick="saveCurrentRoute()" style="margin-bottom: 5px; margin-right: 5px; position: relative; z-index: 1000;">Save Route</button>
+            <button id="calculateConfilcts" onclick="calculateConflicts()" style="margin-bottom: 5px; margin-right: 5px; position: relative; z-index: 1000;">Calculate Conflicts</button>
+        </div>
+
+
                   </div>
           		</div><!-- col-lg-12-->      	
           	</div><!-- /row -->
           	
+    <script src="https://unpkg.com/leaflet@1.0.1/dist/leaflet.js"></script>
+    <script src="https://npmcdn.com/@turf/turf@3.5.1/turf.min.js"></script>
+
+    <script>
+        var map = L.map('map').setView([43.6906, -79.4176], 12);
+        mapLink = 
+            '<a href="http://openstreetmap.org">OpenStreetMap</a>';
+        L.tileLayer(
+            'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: 'Map data &copy; ' + mapLink,
+            maxZoom: 18
+            }).addTo(map);
+        map.on('click', onMapClick);
+
+
+
+        var selectedPoints = [];
+        var markers = [];
+        var polygons = [];
+        var routes = [];
+
+        function onMapClick(e) {
+            selectedPoints.push(e.latlng);
+            var marker = L.marker(e.latlng).addTo(map);
+            markers.push(marker);
+            var length = selectedPoints.length;
+            if (length > 1) {
+                var polygon = L.polygon([selectedPoints[length - 2], selectedPoints[length - 1]]).addTo(map);
+                polygon.setStyle({
+                    color: 'blue',
+                    weight: 8
+                });
+                polygons.push(polygon);
+            }
+        }
+
+        function clearMap() {
+            selectedPoints = [];
+            markers.forEach( function(layer) {layer.remove();} );
+            polygons.forEach( function(layer) {layer.remove();} );
+            markers = [];
+            polygons = [];
+        }
+
+        function saveCurrentRoute() {
+            if (selectedPoints.length > 1) {
+                routes.push(selectedPoints);
+            }
+            clearMap();
+        }
+
+        function calculateConflicts() {
+            var currentRoute = turf.lineString(selectedPoints.map(fromLatLng));
+            var previousRoutes = routes.map(function (routePoints) {
+                return turf.lineString(routePoints.map(fromLatLng));
+            });
+            var currentRouteBuffer = turf.buffer(currentRoute, 5, 'meters');
+            var conflicts = previousRoutes.filter(function (route) {
+                var routeBuffer = turf.buffer(route, 5, 'meters');
+                var intersection = turf.intersect(routeBuffer, currentRouteBuffer);
+                if (intersection != undefined && turf.area(intersection) > 100) {
+                    return true;
+                }
+                else  {
+                    return false;
+                }
+            });
+
+            if (conflicts.length > 0) {
+                conflicts.forEach(function (route) {
+                    var polygon = L.polygon(route.geometry.coordinates.map(toLatLng)).addTo(map);
+                    polygon.setStyle({
+                        color: 'red',
+                        weight: 8
+                    });
+                    polygons.push(polygon);
+                });
+            }
+        }
+
+        function toLatLng(array) {
+            return L.latLng(array[0], array[1]);
+        }
+
+        function fromLatLng(latLng) {
+            return [latLng.lat, latLng.lng];
+        }
+
+    </script>
           	<!-- INLINE FORM ELELEMNTS -->
           	<div class="row mt">
           		<div class="col-lg-12">
