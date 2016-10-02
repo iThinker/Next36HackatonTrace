@@ -436,7 +436,7 @@
         }
         ];
 
-        var tmpProject = nil;
+        var tmpProject = null;
 
         mapLink = '<a href="http://openstreetmap.org">OpenStreetMap</a>';
         L.tileLayer(
@@ -531,7 +531,7 @@
         var projectIdCounter = 0;
 
         function createProjectAction() {
-            tmpProject = nil;
+            tmpProject = null;
             var project = {
                 id: projectIdCounter,
                 startDate: new Date($('#datestart').val()),
@@ -560,7 +560,7 @@
             projects.push(tmpProject);
             clearMap(creationMap);
             clearForm();
-            tmpProject = nil;
+            tmpProject = null;
         }
 
         function clearForm() {
@@ -577,7 +577,7 @@
 
 
 
-          	<!-- INLINE FORM ELELEMNTS -->
+          	<!-- INLINE FORM ELEMENTS -->
           	<div class="row mt">
           		<div class="col-lg-12">
           			<div class="form-panel">
