@@ -353,8 +353,10 @@
                       </form>
 
                       <div id="Foo" name="Foo" class="collapse"> <h2>You Have a Conflict</h2>
-<div class="alert alert-danger"><b>Oh snap!</b> Change a few things up and try submitting again.</div>
-             <button type="button" onclick="forceSaveProject(); document.getElementById('enable').click(); document.getElementById('disable').click();"  class="btn btn-theme">Apply</button>
+                          <div id="conflictTable" name="conflictTable">
+                              <div class="alert alert-danger"><b>Oh snap!</b> Change a few things up and try submitting again.</div>
+                          </div>
+                        <button type="button" onclick="forceSaveProject(); document.getElementById('enable').click(); document.getElementById('disable').click();"  class="btn btn-theme">Apply</button>
                           <button type="button" onclick="document.getElementById('enable').click(); document.getElementById('disable').click();"  class="btn btn-theme04">Back</button>
 
                       </div>
@@ -540,7 +542,7 @@
             return [latLng.lat, latLng.lng];
         }
 
-        var projectIdCounter = 0;
+        var projectIdCounter = 1337;
 
         function createProjectAction() {
             tmpProject = null;
@@ -571,7 +573,7 @@
                             +'</div>';
                 }).join("");
 
-                $('#Foo').html('<table>' + conflictCells +'</table>');
+                $('#conflictTable').html('<table>' + conflictCells +'</table>');
             }
             else {
                 projectIdCounter++;
