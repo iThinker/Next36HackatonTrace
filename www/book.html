@@ -562,10 +562,11 @@
                 document.getElementById('disable').click();
                 document.getElementById('enable').click();
                 var conflictCells = conflicts.map(function (project) {
-                    return '<tr><div class="alert alert-danger"><b>Conflict!</b> '
+                    return '<tr><div class="alert alert-danger"><b>Conflict!</b><br>'
                             +'Project id: '
                             + project.id
-                            +' Contact person: '
+                            + '<br>'
+                            +'Contact person: '
                             + project.manager
                             +'</div>';
                 }).join("");
