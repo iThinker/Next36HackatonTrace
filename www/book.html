@@ -556,6 +556,13 @@
             }
         }
 
+        function forceSaveProject() {
+            projects.push(tmpProject);
+            clearMap(creationMap);
+            clearForm();
+            tmpProject = nil;
+        }
+
         function clearForm() {
             $('#datestart').val("");
             $('#dateend').val("");
