@@ -277,54 +277,78 @@
 <h4 class="mb"><i class="fa fa-angle-right"></i> New Project</h4>
                       <form class="form-horizontal style-form" method="get">
                           <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Default</label>
+                              <label class="col-sm-2 col-sm-2 control-label">Start Date</label>
                               <div class="col-sm-10">
-                                  <input type="text" class="form-control">
+                                  <input type="text" class="form-control" id="datestart">
                               </div>
+                              </div>
+                              <div class="form-group">
+
+                              <label class="col-sm-2 col-sm-2 control-label">End Date</label>
+                              <div class="col-sm-10">
+                                  <input type="text" class="form-control" id="dateend">
+                              </div>
+
                           </div>
+        <div class="form-group">
+<label class="col-sm-2 col-sm-2 control-label">Project Type</label>
+           <div class="col-sm-10" id="projecttype">
+           <select class="form-control">
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+            </select>
+            </div>
+</div>
+
+        <div class="form-group">
+<label class="col-sm-2 col-sm-2 control-label">Project Subtype</label>
+           <div class="col-sm-10">
+           <select class="form-control" id="projectsubtype">
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+            </select>
+            </div>
+</div>
+
+        <div class="form-group">
+<label class="col-sm-2 col-sm-2 control-label">Impact</label>
+           <div class="col-sm-10">
+           <select class="form-control" id="impact">
+              <option>Major</option>
+              <option>Regular</option>
+              <option>Minor</option>
+            </select>
+            </div>
+</div>
+
+        <div class="form-group">
+<label class="col-sm-2 col-sm-2 control-label">Contact Person</label>
+           <div class="col-sm-10">
+                                  <input type="text" class="form-control" id="person">
+                              </div>
+
+            </div>
+
+
+
+
                           <div class="form-group">
                               <label class="col-sm-2 col-sm-2 control-label">Help text</label>
                               <div class="col-sm-10">
-                                  <input type="text" class="form-control">
-                                  <span class="help-block">A block of help text that breaks onto a new line and may extend beyond one line.</span>
+                                  <input type="text" class="form-control" id="additional">
+                                  <span class="help-block">Please provide explonation of your Project.</span>
                               </div>
                           </div>
-                          <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Rounder</label>
-                              <div class="col-sm-10">
-                                  <input type="text" class="form-control round-form">
-                              </div>
-                          </div>
-                          <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Input focus</label>
-                              <div class="col-sm-10">
-                                  <input class="form-control" id="focusedInput" type="text" value="This is focused...">
-                              </div>
-                          </div>
-                          <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Disabled</label>
-                              <div class="col-sm-10">
-                                  <input class="form-control" id="disabledInput" type="text" placeholder="Disabled input here..." disabled>
-                              </div>
-                          </div>
-                          <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Placeholder</label>
-                              <div class="col-sm-10">
-                                  <input type="text"  class="form-control" placeholder="placeholder">
-                              </div>
-                          </div>
-                          <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Password</label>
-                              <div class="col-sm-10">
-                                  <input type="password"  class="form-control" placeholder="">
-                              </div>
-                          </div>
-                          <div class="form-group">
-                              <label class="col-lg-2 col-sm-2 control-label">Static control</label>
-                              <div class="col-lg-10">
-                                  <p class="form-control-static">email@example.com</p>
-                              </div>
-                          </div>
+
+
+                          <button type="submit" class="btn btn-theme">Apply</button>
+
                       </form>
 
             </div>
