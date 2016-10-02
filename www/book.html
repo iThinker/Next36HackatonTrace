@@ -334,11 +334,11 @@
                   <div class="form-panel">
 
 
-<div id="mapContainer" style="height: 600px">
+        <div id="mapContainer" style="height: 600px">
             <div id="map" style="height: 600px; margin-bottom: 5px;"></div>
             <button id="clear" onclick="clearMap(creationMap)" style="margin-bottom: 5px; margin-right: 5px; position: relative; z-index: 1000;">Clear</button>
             <button id="saveRoute" onclick="saveCurrentRoute(creationMap)" style="margin-bottom: 5px; margin-right: 5px; position: relative; z-index: 1000;">Save Route</button>
-            <button id="calculateConfilcts" onclick="calculateConflicts(creationMap)" style="margin-bottom: 5px; margin-right: 5px; position: relative; z-index: 1000;">Calculate Conflicts</button>
+            <button id="calculateConfilcts" onclick="createProjectAction()" style="margin-bottom: 5px; margin-right: 5px; position: relative; z-index: 1000;">Calculate Conflicts</button>
         </div>
 
 
@@ -413,8 +413,7 @@
         }
         ];
 
-        mapLink = 
-            '<a href="http://openstreetmap.org">OpenStreetMap</a>';
+        mapLink = '<a href="http://openstreetmap.org">OpenStreetMap</a>';
         L.tileLayer(
             'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: 'Map data &copy; ' + mapLink,
@@ -455,20 +454,23 @@
         }
 
         function calculateConflicts(map) {
+            var selectedStartDate = new Date("2016-10-01");
+            var selectedEndDate = new Date("2016-10-02");
             var currentRoute = turf.lineString(map.selectedPoints.map(fromLatLng));
             var currentRouteBuffer = turf.buffer(currentRoute, 5, 'meters');
             var conflicts = projects.filter(function (project) {
                 var route = turf.lineString(project.coordinates.map(fromLatLng));
                 var routeBuffer = turf.buffer(route, 5, 'meters');
                 var intersection = turf.intersect(routeBuffer, currentRouteBuffer);
-                if (intersection != undefined && turf.area(intersection) > 100) {
-                    return true;
-                }
-                else  {
-                    return false;
-                }
+                var conflictsOnArea = intersection != undefined && turf.area(intersection) > 100;
+                var conflictsOnTime = dateRangesOverlaps(selectedStartDate, selectedEndDate, project.startDate, project.endDate);
+                return conflictsOnArea && conflictsOnTime;
             });
 
+            return conflicts;
+        }
+
+        function displayConflicts(conflicts, map) {
             if (conflicts.length > 0) {
                 conflicts.forEach(function (project) {
                     var polyline = L.polyline(project.coordinates).addTo(map);
@@ -476,9 +478,16 @@
                         color: 'red',
                         weight: 8
                     });
-                     map.polylines.push(polyline);
+                    map.polylines.push(polyline);
                 });
             }
+        }
+
+        function dateRangesOverlaps(a_start, a_end, b_start, b_end) {
+            if (a_start <= b_start && b_start <= a_end) return true; // b starts in a
+            if (a_start <= b_end   && b_end   <= a_end) return true; // b ends in a
+            if (b_start <  a_start && a_end   <  b_end) return true; // a in b
+            return false;
         }
 
         function toLatLng(array) {
@@ -489,7 +498,10 @@
             return [latLng.lat, latLng.lng];
         }
 
-
+        function createProjectAction() {
+            var conflicts = calculateConflicts(creationMap);
+            displayConflicts(conflicts, creationMap);
+        }
 
 
     </script>
