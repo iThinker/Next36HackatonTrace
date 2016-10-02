@@ -310,11 +310,68 @@
     <script src="https://npmcdn.com/@turf/turf@3.5.1/turf.min.js"></script>
 
     <script>
-        var creationMap = L.map('map').setView([43.6906, -79.4176], 12);
+        var creationMap = L.map('map').setView([43.6906, -79.4176], 16);
         creationMap.selectedPoints = [];
         creationMap.markers = [];
         creationMap.polylines = [];
-        routes = [];
+
+        var projects = [{
+            id: "TH999997",
+            startDate: new Date("2016-10-01"),
+            endDate: new Date("2016-12-19"),
+            company: "Toronto Hydro",
+            type: "Electrical",
+            impact: "major",
+            manager: "John Peng",
+            description: "Repair cable chamber.",
+            coordinates: [
+                {
+                    "lat": 43.69194839031993,
+                    "lng": -79.42185044288637
+                },
+                {
+                    "lat": 43.69235178611565,
+                    "lng": -79.41968321800233
+                },
+                {
+                    "lat": 43.69251469518709,
+                    "lng": -79.41932916641237
+                },
+                {
+                    "lat": 43.692980147238465,
+                    "lng": -79.41702246665956
+                }
+            ]
+        },
+            {
+            id: "BM999998",
+            startDate: new Date("2016-08-02"),
+            endDate: new Date("2016-08-17"),
+            company: "Bell Mobility",
+            type: "Construction",
+            impact: "minor",
+            manager: "Simon Cheng",
+            description: "Replace deteriorating wood pole with concrete pole.",
+            coordinates: [
+                {
+                    "lat": 43.69194839031993,
+                    "lng": -79.42185044288637
+                },
+                {
+                    "lat": 43.69235178611565,
+                    "lng": -79.41968321800233
+                },
+                {
+                    "lat": 43.69251469518709,
+                    "lng": -79.41932916641237
+                },
+                {
+                    "lat": 43.692980147238465,
+                    "lng": -79.41702246665956
+                }
+            ]
+        }
+        ];
 
         mapLink = 
             '<a href="http://openstreetmap.org">OpenStreetMap</a>';
@@ -352,15 +409,15 @@
 
         function saveCurrentRoute(map) {
             if (map.selectedPoints.length > 1) {
-                routes.push(map.selectedPoints);
+                projects.push({coordinates: map.selectedPoints});
             }
             clearMap(map);
         }
 
         function calculateConflicts(map) {
             var currentRoute = turf.lineString(map.selectedPoints.map(fromLatLng));
-            var previousRoutes = routes.map(function (routePoints) {
-                return turf.lineString(routePoints.map(fromLatLng));
+            var previousRoutes = projects.map(function (project) {
+                return turf.lineString(project.coordinates.map(fromLatLng));
             });
             var currentRouteBuffer = turf.buffer(currentRoute, 5, 'meters');
             var conflicts = previousRoutes.filter(function (route) {
@@ -394,7 +451,13 @@
             return [latLng.lat, latLng.lng];
         }
 
+
+
+
     </script>
+
+
+
           	<!-- INLINE FORM ELELEMNTS -->
           	<div class="row mt">
           		<div class="col-lg-12">
