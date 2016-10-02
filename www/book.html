@@ -339,7 +339,7 @@
 
 
                           <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Help text</label>
+                              <label class="col-sm-2 col-sm-2 control-label">Project Description</label>
                               <div class="col-sm-10">
                                   <input type="text" class="form-control" id="additional" name="additional">
                                   <span class="help-block">Please provide explanation of your Project.</span>
@@ -351,7 +351,7 @@
 
                       </form>
 
-                      <div id="Foo" class="collapse"> <h2>You Have a Conflict</h2> 
+                      <div id="Foo" name="Foo" class="collapse"> <h2>You Have a Conflict</h2>
 <div class="alert alert-danger"><b>Oh snap!</b> Change a few things up and try submitting again.</div>
                       </div>
 
@@ -553,14 +553,25 @@
             if (conflicts.length > 0) {
                 tmpProject = project;
                 displayConflicts(conflicts, creationMap);
-                document.getElementById('disable').click(); document.getElementById('enable').click();
+                document.getElementById('disable').click();
+                document.getElementById('enable').click();
+                var conflictCells = conflicts.map(function (project) {
+                    return '<tr><div class="alert alert-danger"><b>Conflict!</b> '
+                            +'Project id: '
+                            + project.id
+                            +' Contact person: '
+                            + project.manager
+                            +'</div>';
+                }).join("");
+
+                $('#Foo').html('<table>' + conflictCells +'</table>');
             }
             else {
                 projectIdCounter++;
                 projects.push(project);
                 clearMap(creationMap);
                 clearForm();
-                alert("Project Created Succesfully");
+                alert("Project Created Successfully");
             }
         }
 
