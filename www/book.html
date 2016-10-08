@@ -373,8 +373,8 @@
 
         <div id="mapContainer" style="height: 600px">
             <div id="map" style="height: 600px; margin-bottom: 5px;"></div>
-            <button id="clear" onclick="clearMap(creationMap)" style="margin-bottom: 5px; margin-right: 5px; position: relative; z-index: 1000;">Clear</button>
-            <button id="saveRoute" onclick="saveCurrentRoute(creationMap)" style="margin-bottom: 5px; margin-right: 5px; position: relative; z-index: 1000;">Save Route</button>
+            <button id="clear" onclick="clearMap(projectCreationMap)" style="margin-bottom: 5px; margin-right: 5px; position: relative; z-index: 1000;">Clear</button>
+            <button id="saveRoute" onclick="saveCurrentRoute(projectCreationMap)" style="margin-bottom: 5px; margin-right: 5px; position: relative; z-index: 1000;">Save Route</button>
             <button id="calculateConfilcts" onclick="createProjectAction()" style="margin-bottom: 5px; margin-right: 5px; position: relative; z-index: 1000;">Calculate Conflicts</button>
         </div>
 
@@ -382,228 +382,6 @@
                   </div>
           		</div><!-- col-lg-12-->      	
           	</div><!-- /row -->
-          	
-    <script src="https://unpkg.com/leaflet@1.0.1/dist/leaflet.js"></script>
-    <script src="https://npmcdn.com/@turf/turf@3.5.1/turf.min.js"></script>
-
-    <script>
-        var creationMap = L.map('map').setView([43.6906, -79.4176], 16);
-        creationMap.selectedPoints = [];
-        creationMap.markers = [];
-        creationMap.polylines = [];
-
-        var projects = [{
-            id: "TH999997",
-            startDate: new Date("2016-10-01"),
-            endDate: new Date("2016-12-19"),
-            company: "Toronto Hydro",
-            type: "Electrical",
-            impact: "Major",
-            manager: "John Peng",
-            description: "Repair cable chamber.",
-            coordinates: [
-                {
-                    "lat": 43.69194839031993,
-                    "lng": -79.42185044288637
-                },
-                {
-                    "lat": 43.69235178611565,
-                    "lng": -79.41968321800233
-                },
-                {
-                    "lat": 43.69251469518709,
-                    "lng": -79.41932916641237
-                },
-                {
-                    "lat": 43.692980147238465,
-                    "lng": -79.41702246665956
-                }
-            ]
-        },
-            {
-            id: "BM999998",
-            startDate: new Date("2016-08-02"),
-            endDate: new Date("2016-08-17"),
-            company: "Bell Mobility",
-            type: "Construction",
-            impact: "Minor",
-            manager: "Simon Cheng",
-            description: "Replace deteriorating wood pole with concrete pole.",
-            coordinates: [
-                {
-                    "lat": 43.69194839031993,
-                    "lng": -79.42185044288637
-                },
-                {
-                    "lat": 43.69235178611565,
-                    "lng": -79.41968321800233
-                },
-                {
-                    "lat": 43.69251469518709,
-                    "lng": -79.41932916641237
-                },
-                {
-                    "lat": 43.692980147238465,
-                    "lng": -79.41702246665956
-                }
-            ]
-        }
-        ];
-
-        var tmpProject = null;
-
-        mapLink = '<a href="http://openstreetmap.org">OpenStreetMap</a>';
-        L.tileLayer(
-            'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: 'Map data &copy; ' + mapLink,
-            maxZoom: 18
-            }).addTo(creationMap);
-        creationMap.on('click', onMapClick);
-
-
-        function onMapClick(e) {
-            var map = e.target;
-            map.selectedPoints.push(e.latlng);
-            var marker = L.marker(e.latlng).addTo(map);
-            map.markers.push(marker);
-            var length = map.selectedPoints.length;
-            if (length > 1) {
-                var polyline = L.polyline([map.selectedPoints[length - 2], map.selectedPoints[length - 1]]).addTo(map);
-                polyline.setStyle({
-                    color: 'blue',
-                    weight: 8
-                });
-                map.polylines.push(polyline);
-            }
-        }
-
-        function clearMap(map) {
-            map.selectedPoints = [];
-            map.markers.forEach( function(layer) {layer.remove();} );
-            map.polylines.forEach( function(layer) {layer.remove();} );
-            map.markers = [];
-            map.polylines = [];
-        }
-
-        function saveCurrentRoute(map) {
-            if (map.selectedPoints.length > 1) {
-                projects.push({coordinates: map.selectedPoints});
-            }
-            clearMap(map);
-        }
-
-        function calculateConflicts(newProject, map) {
-            var currentRoute = turf.lineString(newProject.coordinates.map(fromLatLng));
-            var currentRouteBuffer = turf.buffer(currentRoute, 5, 'meters');
-            var conflicts = projects.filter(function (project) {
-                var route = turf.lineString(project.coordinates.map(fromLatLng));
-                var routeBuffer = turf.buffer(route, 5, 'meters');
-                var intersection = turf.intersect(routeBuffer, currentRouteBuffer);
-                var conflictsOnArea = intersection != undefined && turf.area(intersection) > 100;
-                var conflictsOnTime = dateRangesOverlaps(newProject.startDate, newProject.endDate, project.startDate, project.endDate);
-                return conflictsOnArea && conflictsOnTime;
-            });
-
-            return conflicts;
-        }
-
-        function displayConflicts(conflicts, map) {
-            if (conflicts.length > 0) {
-                conflicts.forEach(function (project) {
-                    var polyline = L.polyline(project.coordinates).addTo(map);
-                    var colorString = 'red';
-                    if (project.impact == 'Minor') {
-                        colorString = 'yellow';
-                    }
-                    else if (project.impact == 'Regular') {
-                        colorString = 'orange';
-                    }
-                    polyline.setStyle({
-                        color: colorString,
-                        weight: 8
-                    });
-                    map.polylines.push(polyline);
-                });
-            }
-        }
-
-        function dateRangesOverlaps(a_start, a_end, b_start, b_end) {
-            if (a_start <= b_start && b_start <= a_end) return true; // b starts in a
-            if (a_start <= b_end   && b_end   <= a_end) return true; // b ends in a
-            if (b_start <  a_start && a_end   <  b_end) return true; // a in b
-            return false;
-        }
-
-        function toLatLng(array) {
-            return L.latLng(array[0], array[1]);
-        }
-
-        function fromLatLng(latLng) {
-            return [latLng.lat, latLng.lng];
-        }
-
-        var projectIdCounter = 1337;
-
-        function createProjectAction() {
-            tmpProject = null;
-            var project = {
-                id: projectIdCounter,
-                startDate: new Date($('#datestart').val()),
-                endDate: new Date($('#dateend').val()),
-                company: "MyCompany",
-                type: $('#project_type').val(),
-                impact: $('#impact').val(),
-                description: $('#additional').val(),
-                manager: $('#contact_person').val(),
-                coordinates: creationMap.selectedPoints
-            };
-            var conflicts = calculateConflicts(project, creationMap);
-            if (conflicts.length > 0) {
-                tmpProject = project;
-                displayConflicts(conflicts, creationMap);
-                document.getElementById('disable').click();
-                document.getElementById('enable').click();
-                var conflictCells = conflicts.map(function (project) {
-                    return '<tr><div class="alert alert-danger"><b>Conflict!</b><br>'
-                            +'Project id: '
-                            + project.id
-                            + '<br>'
-                            +'Contact person: '
-                            + project.manager
-                            +'</div>';
-                }).join("");
-
-                $('#conflictTable').html('<table>' + conflictCells +'</table>');
-            }
-            else {
-                projectIdCounter++;
-                projects.push(project);
-                clearMap(creationMap);
-                clearForm();
-                alert("Project Created Successfully");
-            }
-        }
-
-        function forceSaveProject() {
-            projects.push(tmpProject);
-            clearMap(creationMap);
-            clearForm();
-            tmpProject = null;
-        }
-
-        function clearForm() {
-            $('#datestart').val("");
-            $('#dateend').val("");
-            $('#project_type').val("Construction");
-            $('#impact').val("Major");
-            $('#additional').val("");
-            $('#contact_person').val("");
-        }
-
-
-    </script>
-
-
 
           	<!-- INLINE FORM ELEMENTS -->
           	<div class="row mt" style="display:none;">
@@ -669,6 +447,189 @@
       $(function(){
           $('select.styled').customSelect();
       });
+
+  </script>
+
+
+  <script src="https://unpkg.com/leaflet@1.0.1/dist/leaflet.js"></script>
+  <script src="https://npmcdn.com/@turf/turf@3.5.1/turf.min.js"></script>
+  <script src="../bower_components/rainbowvis.js/rainbowvis.js"></script>
+
+  <script>
+      var projectCreationMap = L.map('map').setView([43.040517, -76.134475], 16);
+      projectCreationMap.selectedPoints = [];
+      projectCreationMap.markers = [];
+      projectCreationMap.polylines = [];
+
+      var projects = [];
+
+      var tmpProject = null;
+
+      mapLink = '<a href="http://openstreetmap.org">OpenStreetMap</a>';
+      L.tileLayer(
+              'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                  attribution: 'Map data &copy; ' + mapLink,
+                  maxZoom: 18
+              }).addTo(projectCreationMap);
+      projectCreationMap.on('click', onMapClick);
+
+      function onMapClick(e) {
+          var map = e.target;
+          map.selectedPoints.push(e.latlng);
+          var marker = L.marker(e.latlng).addTo(map);
+          map.markers.push(marker);
+          var length = map.selectedPoints.length;
+          if (length > 1) {
+              var polyline = L.polyline([map.selectedPoints[length - 2], map.selectedPoints[length - 1]]).addTo(map);
+              polyline.setStyle({
+                  color: 'blue',
+                  weight: 8
+              });
+              map.polylines.push(polyline);
+          }
+      }
+
+      function clearMap(map) {
+          map.selectedPoints = [];
+          map.markers.forEach( function(layer) {layer.remove();} );
+          map.polylines.forEach( function(layer) {layer.remove();} );
+          map.markers = [];
+          map.polylines = [];
+      }
+
+      function saveCurrentRoute(map) {
+          if (map.selectedPoints.length > 1) {
+              projects.push({coordinates: map.selectedPoints});
+          }
+          clearMap(map);
+      }
+
+      function calculateConflicts(newProject, map) {
+          var currentRoute = turf.lineString(newProject.coordinates.map(fromLatLng));
+          var currentRouteBuffer = turf.buffer(currentRoute, 5, 'meters');
+          var conflicts = projects.filter(function (project) {
+              var route = turf.lineString(project.coordinates.map(fromLatLng));
+              var routeBuffer = turf.buffer(route, 5, 'meters');
+              var intersection = turf.intersect(routeBuffer, currentRouteBuffer);
+              var conflictsOnArea = intersection != undefined && turf.area(intersection) > 100;
+              var conflictsOnTime = dateRangesOverlaps(newProject.startDate, newProject.endDate, project.startDate, project.endDate);
+              return conflictsOnArea && conflictsOnTime;
+          });
+
+          return conflicts;
+      }
+
+      function displayConflicts(conflicts, map) {
+          if (conflicts.length > 0) {
+              conflicts.forEach(function (project) {
+                  var polyline = L.polyline(project.coordinates).addTo(map);
+                  var colorString = 'red';
+                  if (project.impact == 'Minor') {
+                      colorString = 'yellow';
+                  }
+                  else if (project.impact == 'Regular') {
+                      colorString = 'orange';
+                  }
+                  polyline.setStyle({
+                      color: colorString,
+                      weight: 8
+                  });
+                  map.polylines.push(polyline);
+              });
+          }
+      }
+
+      function dateRangesOverlaps(a_start, a_end, b_start, b_end) {
+          if (a_start <= b_start && b_start <= a_end) return true; // b starts in a
+          if (a_start <= b_end   && b_end   <= a_end) return true; // b ends in a
+          if (b_start <  a_start && a_end   <  b_end) return true; // a in b
+          return false;
+      }
+
+      function toLatLng(array) {
+          return L.latLng(array[0], array[1]);
+      }
+
+      function fromLatLng(latLng) {
+          return [latLng.lat, latLng.lng];
+      }
+
+      var projectIdCounter = 1337;
+
+      function createProjectAction() {
+          tmpProject = null;
+          var project = {
+              id: projectIdCounter,
+              startDate: new Date($('#datestart').val()),
+              endDate: new Date($('#dateend').val()),
+              company: "MyCompany",
+              type: $('#project_type').val(),
+              impact: $('#impact').val(),
+              description: $('#additional').val(),
+              manager: $('#contact_person').val(),
+              coordinates: projectCreationMap.selectedPoints
+          };
+          var conflicts = calculateConflicts(project, projectCreationMap);
+          if (conflicts.length > 0) {
+              tmpProject = project;
+              displayConflicts(conflicts, projectCreationMap);
+              document.getElementById('disable').click();
+              document.getElementById('enable').click();
+              var conflictCells = conflicts.map(function (project) {
+                  return '<tr><div class="alert alert-danger"><b>Conflict!</b><br>'
+                          +'Project id: '
+                          + project.id
+                          + '<br>'
+                          +'Contact person: '
+                          + project.manager
+                          +'</div>';
+              }).join("");
+
+              $('#conflictTable').html('<table>' + conflictCells +'</table>');
+          }
+          else {
+              projectIdCounter++;
+              projects.push(project);
+              clearMap(projectCreationMap);
+              clearForm();
+              alert("Project Created Successfully");
+          }
+      }
+
+      function forceSaveProject() {
+          projects.push(tmpProject);
+          clearMap(projectCreationMap);
+          clearForm();
+          tmpProject = null;
+      }
+
+      function clearForm() {
+          $('#datestart').val("");
+          $('#dateend').val("");
+          $('#project_type').val("Construction");
+          $('#impact').val("Major");
+          $('#additional').val("");
+          $('#contact_person').val("");
+      }
+
+
+      var streetsData;
+      var streetsLayer;
+      $.getJSON('../streets.geojson', function(data) {
+          streetsData = data;
+
+          var numberOfColors = 10;
+          var rainbow = new Rainbow();
+          rainbow.setNumberRange(1, numberOfColors);
+          rainbow.setSpectrum('red', 'green');
+          streetsLayer = L.geoJSON(streetsData, {
+              style: function(feature) {
+                  var overall = feature.properties.overall;
+                  return '#' + rainbow.colorAt(overall - 1);
+              }
+          }).addTo(projectCreationMap);
+      });
+
 
   </script>
 
