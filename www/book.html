@@ -610,28 +610,31 @@
 
       var streetsData;
       var streetsLayer;
-      $.getJSON('../streets.geojson', function(data) {
-          streetsData = data;
+      function populateOverlay() {
+          $.getJSON('./streets.geojson', function (data) {
+              streetsData = data;
 
-          var numberOfColors = 10;
-          var rainbow = new Rainbow();
-          rainbow.setNumberRange(1, numberOfColors);
-          rainbow.setSpectrum('red', 'yellow', 'green');
-          streetsLayer = L.geoJSON(streetsData, {
-              style: function(feature) {
-                  var overall = feature.properties.overall;
-                  return {
-                      color: '#' + rainbow.colorAt(overall - 1),
-                      opacity: 0.5
-                  };
-              }
-          }).addTo(projectCreationMap);
-      });
+              var numberOfColors = 10;
+              var rainbow = new Rainbow();
+              rainbow.setNumberRange(1, numberOfColors);
+              rainbow.setSpectrum('red', 'yellow', 'green');
+              streetsLayer = L.geoJSON(streetsData, {
+                  style: function (feature) {
+                      var overall = feature.properties.overall;
+                      return {
+                          color: '#' + rainbow.colorAt(overall - 1),
+                          opacity: 0.5
+                      };
+                  }
+              }).addTo(projectCreationMap);
+          });
+      }
   </script>
 
   <script>
       $(document).ready(function() {
           clearForm();
+          populateOverlay();
       });
   </script>
 
