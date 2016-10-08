@@ -438,17 +438,7 @@
 	<script type="text/javascript" src="assets/js/bootstrap-inputmask/bootstrap-inputmask.min.js"></script>
 	
 	
-	<script src="assets/js/form-component.js"></script>    
-    
-    
-  <script>
-      //custom select box
-
-      $(function(){
-          $('select.styled').customSelect();
-      });
-
-  </script>
+	<script src="assets/js/form-component.js"></script>
 
 
   <script src="https://unpkg.com/leaflet@1.0.1/dist/leaflet.js"></script>
@@ -556,6 +546,11 @@
       var projectIdCounter = 1337;
 
       function createProjectAction() {
+          if (projectCreationMap.selectedPoints.length <= 1) {
+              alert('Please select street on map');
+              return;
+          }
+
           tmpProject = null;
           var project = {
               id: projectIdCounter,
@@ -603,14 +598,15 @@
       }
 
       function clearForm() {
-          $('#datestart').val("");
-          $('#dateend').val("");
+          var date = new Date();
+          $('#datestart').val(date.toISOString().substr(0, 10));
+          date.setDate(date.getDate() + 1);
+          $('#dateend').val(date.toISOString().substr(0, 10));
           $('#project_type').val("Construction");
           $('#impact').val("Major");
-          $('#additional').val("");
-          $('#contact_person').val("");
+          $('#additional').val("Sample description");
+          $('#contact_person').val("John Doe");
       }
-
 
       var streetsData;
       var streetsLayer;
@@ -631,8 +627,12 @@
               }
           }).addTo(projectCreationMap);
       });
+  </script>
 
-
+  <script>
+      $(document).ready(function() {
+          clearForm();
+      });
   </script>
 
   </body>
