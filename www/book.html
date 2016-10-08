@@ -444,6 +444,7 @@
   <script src="https://unpkg.com/leaflet@1.0.1/dist/leaflet.js"></script>
   <script src="https://npmcdn.com/@turf/turf@3.5.1/turf.min.js"></script>
   <script src="../bower_components/rainbowvis.js/rainbowvis.js"></script>
+  <script src="streets.js"></script>
 
   <script>
       var projectCreationMap = L.map('map').setView([43.040517, -76.134475], 16);
@@ -608,33 +609,28 @@
           $('#contact_person').val("John Doe");
       }
 
-      var streetsData;
       var streetsLayer;
-      function populateOverlay() {
-          $.getJSON('./streets.geojson', function (data) {
-              streetsData = data;
-
-              var numberOfColors = 10;
-              var rainbow = new Rainbow();
-              rainbow.setNumberRange(1, numberOfColors);
-              rainbow.setSpectrum('red', 'yellow', 'green');
-              streetsLayer = L.geoJSON(streetsData, {
-                  style: function (feature) {
-                      var overall = feature.properties.overall;
-                      return {
-                          color: '#' + rainbow.colorAt(overall - 1),
-                          opacity: 0.5
-                      };
-                  }
-              }).addTo(projectCreationMap);
-          });
+      function populateStreetsOverlay() {
+          var numberOfColors = 10;
+          var rainbow = new Rainbow();
+          rainbow.setNumberRange(1, numberOfColors);
+          rainbow.setSpectrum('red', 'yellow', 'green');
+          streetsLayer = L.geoJSON(streetsData, {
+              style: function (feature) {
+                  var overall = feature.properties.overall;
+                  return {
+                      color: '#' + rainbow.colorAt(overall - 1),
+                      opacity: 0.5
+                  };
+              }
+          }).addTo(projectCreationMap);
       }
   </script>
 
   <script>
       $(document).ready(function() {
           clearForm();
-          populateOverlay();
+          populateStreetsOverlay();
       });
   </script>
 
