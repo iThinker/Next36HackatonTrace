@@ -1,0 +1,15 @@
+{
+  "name": "Next36HackatonTrace",
+  "homepage": "https://github.com/iThinker/Next36HackatonTrace",
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
