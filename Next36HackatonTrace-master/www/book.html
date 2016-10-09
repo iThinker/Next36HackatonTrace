@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Dashboard">
+    <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+
+    <title>Trace - Book The Street</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="assets/css/bootstrap.css" rel="stylesheet">
+    <!--external css-->
+    <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+        
+    <!-- Custom styles for this template -->
+    <link href="assets/css/style.css" rel="stylesheet">
+    <link href="assets/css/style-responsive.css" rel="stylesheet">
+    <link 
+        rel="stylesheet" 
+        href="https://unpkg.com/leaflet@1.0.1/dist/leaflet.css"
+    />
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+  <section id="container" >
+      <!-- **********************************************************************************************************************************************************
+      TOP BAR CONTENT & NOTIFICATIONS
+      *********************************************************************************************************************************************************** -->
+      <!--header start-->
+      <header class="header black-bg">
+              <div class="sidebar-toggle-box">
+                  <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
+              </div>
+            <!--logo start-->
+            <a href="index.html" class="logo"><b>Trace FREE</b></a>
+            <!--logo end-->
+            <div class="nav notify-row" id="top_menu">
+                <!--  notification start -->
+                <ul class="nav top-menu">
+                    <!-- settings start -->
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
+                            <i class="fa fa-tasks"></i>
+                            <span class="badge bg-theme">4</span>
+                        </a>
+                        <ul class="dropdown-menu extended tasks-bar">
+                            <div class="notify-arrow notify-arrow-green"></div>
+                            <li>
+                                <p class="green">You have 4 pending tasks</p>
+                            </li>
+                            <li>
+                                <a href="index.html#">
+                                    <div class="task-info">
+                                        <div class="desc">Trace Admin Panel</div>
+                                        <div class="percent">40%</div>
+                                    </div>
+                                    <div class="progress progress-striped">
+                                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+                                            <span class="sr-only">40% Complete (success)</span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="index.html#">
+                                    <div class="task-info">
+                                        <div class="desc">Database Update</div>
+                                        <div class="percent">60%</div>
+                                    </div>
+                                    <div class="progress progress-striped">
+                                        <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+                                            <span class="sr-only">60% Complete (warning)</span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="index.html#">
+                                    <div class="task-info">
+                                        <div class="desc">Product Development</div>
+                                        <div class="percent">80%</div>
+                                    </div>
+                                    <div class="progress progress-striped">
+                                        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+                                            <span class="sr-only">80% Complete</span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="index.html#">
+                                    <div class="task-info">
+                                        <div class="desc">Payments Sent</div>
+                                        <div class="percent">70%</div>
+                                    </div>
+                                    <div class="progress progress-striped">
+                                        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: 70%">
+                                            <span class="sr-only">70% Complete (Important)</span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="external">
+                                <a href="#">See All Tasks</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- settings end -->
+                    <!-- inbox dropdown start-->
+                    <li id="header_inbox_bar" class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
+                            <i class="fa fa-envelope-o"></i>
+                            <span class="badge bg-theme">5</span>
+                        </a>
+                        <ul class="dropdown-menu extended inbox">
+                            <div class="notify-arrow notify-arrow-green"></div>
+                            <li>
+                                <p class="green">You have 5 new messages</p>
+                            </li>
+                            <li>
+                                <a href="index.html#">
+                                    <span class="photo"><img alt="avatar" src="assets/img/ui-zac.jpg"></span>
+                                    <span class="subject">
+                                    <span class="from">Zac Snider</span>
+                                    <span class="time">Just now</span>
+                                    </span>
+                                    <span class="message">
+                                        Hi mate, how is everything?
+                                    </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="index.html#">
+                                    <span class="photo"><img alt="avatar" src="assets/img/ui-divya.jpg"></span>
+                                    <span class="subject">
+                                    <span class="from">Divya Manian</span>
+                                    <span class="time">40 mins.</span>
+                                    </span>
+                                    <span class="message">
+                                     Hi, I need your help with this.
+                                    </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="index.html#">
+                                    <span class="photo"><img alt="avatar" src="assets/img/ui-danro.jpg"></span>
+                                    <span class="subject">
+                                    <span class="from">Dan Rogers</span>
+                                    <span class="time">2 hrs.</span>
+                                    </span>
+                                    <span class="message">
+                                        Love your new Dashboard.
+                                    </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="index.html#">
+                                    <span class="photo"><img alt="avatar" src="assets/img/ui-sherman.jpg"></span>
+                                    <span class="subject">
+                                    <span class="from">Dj Sherman</span>
+                                    <span class="time">4 hrs.</span>
+                                    </span>
+                                    <span class="message">
+                                        Please, answer asap.
+                                    </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="index.html#">See all messages</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- inbox dropdown end -->
+                </ul>
+                <!--  notification end -->
+            </div>
+            <div class="top-menu">
+            	<ul class="nav pull-right top-menu">
+                    <li><a class="logout" href="login.html">Logout</a></li>
+            	</ul>
+            </div>
+        </header>
+      <!--header end-->
+      
+      <!-- **********************************************************************************************************************************************************
+      MAIN SIDEBAR MENU
+      *********************************************************************************************************************************************************** -->
+      <!--sidebar start-->
+      <aside>
+          <div id="sidebar"  class="nav-collapse ">
+              <!-- sidebar menu start-->
+              <!-- sidebar menu start-->
+              <ul class="sidebar-menu" id="nav-accordion">
+              
+                  <p class="centered"><a href="profile.html"></a></p>
+                  <h5 class="centered">Ensures that there are no scheduling conflicts with <br>other events or activities.</h5>
+                    
+                  <li class="mt">
+                      <a href="index.html">
+                          <i class="fa fa-dashboard"></i>
+                          <span>Dashboard</span>
+                      </a>
+                  </li>
+
+                  
+                  <li class="sub-menu">
+                      <a class="active" href="javascript:;" >
+                          <i class="fa fa-cogs"></i>
+                          <span>Booking</span>
+                      </a>
+                      <ul class="sub">
+                          <li class="active"><a  href="book.html">Input Data</a></li>
+                          <li><a  href="book.html">Check Availability</a></li>
+                          <li><a  href="book.html">Book the road</a></li>
+                      </ul>
+                  </li>
+                  <li class="sub-menu">
+                      <a href="javascript:;" >
+                          <i class="fa fa-th"></i>
+                          <span>Data Tables</span>
+                      </a>
+                      <ul class="sub">
+                          <li><a  href="basic_table.html">Basic Table</a></li>
+                      </ul>
+                  </li>
+                  
+                  <li class="sub-menu">
+                      <a href="javascript:;" >
+                          <i class="fa fa-book"></i>
+                          <span>Extra Pages</span>
+                      </a>
+                      <ul class="sub">
+                          <li><a  href="lock_screen.html">Lock Screen</a></li>
+                 
+                          <li><a  href="blank.html">Team</a></li>
+                      </ul>
+                  </li>
+
+                  <li class="sub-menu">
+                      <a href="javascript:;" >
+                          <i class=" fa fa-bar-chart-o"></i>
+                          <span>Charts</span>
+                      </a>
+                      <ul class="sub">
+                          <li><a  href="morris.html">Morris</a></li>
+<li><a  href="panels.html">Numbers</a></li>
+                      </ul>
+                  </li>
+
+              </ul>
+              <!-- sidebar menu end-->
+              <!-- sidebar menu end-->
+          </div>
+      </aside>
+      <!--sidebar end-->
+      
+      <!-- **********************************************************************************************************************************************************
+      MAIN CONTENT
+      *********************************************************************************************************************************************************** -->
+      <!--main content start-->
+      <section id="main-content">
+          <section class="wrapper">
+          	
+          	<!-- BASIC FORM ELELEMNTS -->
+          	<div class="row mt">
+            <div class="col-lg-4">
+                  <div class="form-panel">
+
+<h4 class="mb"><i class="fa fa-angle-right"></i> New Project</h4>
+                      <form class="form-horizontal style-form collapse in" method="get" id="Bar">
+                          <div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label">Start Date</label>
+                              <div class="col-sm-10">
+                                  <input type="date" class="form-control" id="datestart" name="datestart">
+                              </div>
+                              </div>
+                              <div class="form-group">
+
+                              <label class="col-sm-2 col-sm-2 control-label">End Date</label>
+                              <div class="col-sm-10">
+                                  <input type="date" class="form-control" id="dateend" name="dateend">
+                              </div>
+
+                          </div>
+        <div class="form-group">
+<label class="col-sm-2 col-sm-2 control-label">Project Type</label>
+           <div class="col-sm-10" id="projecttype">
+           <select class="form-control" id="project_type" name="project_type">
+              <option>Construction</option>
+              <option>Electrical</option>
+              <option>Tree cutting</option>
+              <option>Entertainment</option>
+              <option>Filming</option>
+            </select>
+            </div>
+</div>
+
+        <div class="form-group">
+<label class="col-sm-2 col-sm-2 control-label">Project Subtype</label>
+           <div class="col-sm-10">
+           <select class="form-control" id="project_subtype" name="project_subtype">
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+            </select>
+            </div>
+</div>
+
+        <div class="form-group">
+<label class="col-sm-2 col-sm-2 control-label">Impact</label>
+           <div class="col-sm-10">
+           <select class="form-control" id="impact" name="impact">
+              <option>Major</option>
+              <option>Regular</option>
+              <option>Minor</option>
+            </select>
+            </div>
+</div>
+
+        <div class="form-group">
+<label class="col-sm-2 col-sm-2 control-label">Contact Person</label>
+           <div class="col-sm-10">
+                                  <input type="text" class="form-control" id="contact_person" name="contact_person">
+                              </div>
+
+            </div>
+
+
+
+
+                          <div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label">Project Description</label>
+                              <div class="col-sm-10">
+                                  <input type="text" class="form-control" id="additional" name="additional">
+                                  <span class="help-block">Please provide explanation of your Project.</span>
+                              </div>
+                          </div>
+
+
+                          <button type="button" onclick="createProjectAction()"  class="btn btn-theme">Apply</button>
+
+                      </form>
+
+                      <div id="Foo" name="Foo" class="collapse"> <h2>You Have a Conflict</h2>
+                          <div id="conflictTable" name="conflictTable">
+                              <div class="alert alert-danger"><b>Oh snap!</b> Change a few things up and try submitting again.</div>
+                          </div>
+                        <button type="button" onclick="forceSaveProject(); document.getElementById('enable').click(); document.getElementById('disable').click();"  class="btn btn-theme">Apply</button>
+                          <button type="button" onclick="document.getElementById('enable').click(); document.getElementById('disable').click();"  class="btn btn-theme04">Back</button>
+
+                      </div>
+
+
+
+            </div>
+            </div>
+
+
+         		<div class="col-lg-8">
+                  <div class="form-panel">
+
+
+        <div id="mapContainer" style="height: 600px">
+            <div id="map" style="height: 600px; margin-bottom: 5px;"></div>
+            <button id="clear" onclick="clearMap(projectCreationMap)" style="margin-bottom: 5px; margin-right: 5px; position: relative; z-index: 1000;">Clear</button>
+            <button id="saveRoute" onclick="saveCurrentRoute(projectCreationMap)" style="margin-bottom: 5px; margin-right: 5px; position: relative; z-index: 1000;">Save Route</button>
+            <button id="calculateConfilcts" onclick="createProjectAction()" style="margin-bottom: 5px; margin-right: 5px; position: relative; z-index: 1000;">Calculate Conflicts</button>
+        </div>
+
+
+                  </div>
+          		</div><!-- col-lg-12-->      	
+          	</div><!-- /row -->
+
+          	<!-- INLINE FORM ELEMENTS -->
+          	<div class="row mt" style="display:none;">
+          		<div class="col-lg-12">
+          			<div class="form-panel">
+
+<a href="#Foo" class="btn btn-default" data-toggle="collapse" id="enable">Toggle Foo</a>
+<button href="#Bar" class="btn btn-default" data-toggle="collapse" id="disable" >Toggle Bar</button>
+
+          			</div><!-- /form-panel -->
+          		</div><!-- /col-lg-12 -->
+          	</div><!-- /row -->
+          	
+          	
+          	
+		</section><! --/wrapper -->
+      </section><!-- /MAIN CONTENT -->
+
+      <!--main content end-->
+      <!--footer start-->
+      <footer class="site-footer">
+          <div class="text-center">
+              2016 - Book Your Room
+              <a href="form_component.html#" class="go-top">
+                  <i class="fa fa-angle-up"></i>
+              </a>
+          </div>
+      </footer>
+      <!--footer end-->
+  </section>
+
+    <!-- js placed at the end of the document so the pages load faster -->
+    <script src="assets/js/jquery.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script class="include" type="text/javascript" src="assets/js/jquery.dcjqaccordion.2.7.js"></script>
+    <script src="assets/js/jquery.scrollTo.min.js"></script>
+    <script src="assets/js/jquery.nicescroll.js" type="text/javascript"></script>
+
+
+    <!--common script for all pages-->
+    <script src="assets/js/common-scripts.js"></script>
+
+    <!--script for this page-->
+    <script src="assets/js/jquery-ui-1.9.2.custom.min.js"></script>
+
+	<!--custom switch-->
+	<script src="assets/js/bootstrap-switch.js"></script>
+	
+	<!--custom tagsinput-->
+	<script src="assets/js/jquery.tagsinput.js"></script>
+	
+	<!--custom checkbox & radio-->
+	
+	<script type="text/javascript" src="assets/js/bootstrap-inputmask/bootstrap-inputmask.min.js"></script>
+	
+	
+	<script src="assets/js/form-component.js"></script>
+
+
+  <script src="https://unpkg.com/leaflet@1.0.1/dist/leaflet.js"></script>
+  <script src="https://npmcdn.com/@turf/turf@3.5.1/turf.min.js"></script>
+  <script src="../bower_components/rainbowvis.js/rainbowvis.js"></script>
+  <script src="streets.js"></script>
+
+  <script>
+      var projectCreationMap = L.map('map').setView([43.040517, -76.134475], 16);
+      projectCreationMap.selectedPoints = [];
+      projectCreationMap.markers = [];
+      projectCreationMap.polylines = [];
+
+      var projects = [];
+
+      var tmpProject = null;
+
+      mapLink = '<a href="http://openstreetmap.org">OpenStreetMap</a>';
+      L.tileLayer('http://{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png', {
+                  attribution: 'Map data &copy; ' + mapLink,
+                  maxZoom: 18
+              }).addTo(projectCreationMap);
+      projectCreationMap.on('click', onMapClick);
+
+      function onMapClick(e) {
+          var map = e.target;
+          map.selectedPoints.push(e.latlng);
+          var marker = L.marker(e.latlng).addTo(map);
+          map.markers.push(marker);
+          var length = map.selectedPoints.length;
+          if (length > 1) {
+              var polyline = L.polyline([map.selectedPoints[length - 2], map.selectedPoints[length - 1]]).addTo(map);
+              polyline.setStyle({
+                  color: 'blue',
+                  weight: 8
+              });
+              map.polylines.push(polyline);
+          }
+      }
+
+      function clearMap(map) {
+          map.selectedPoints = [];
+          map.markers.forEach( function(layer) {layer.remove();} );
+          map.polylines.forEach( function(layer) {layer.remove();} );
+          map.markers = [];
+          map.polylines = [];
+      }
+
+      function saveCurrentRoute(map) {
+          if (map.selectedPoints.length > 1) {
+              projects.push({coordinates: map.selectedPoints});
+          }
+          clearMap(map);
+      }
+
+      function calculateConflicts(newProject, map) {
+          var currentRoute = turf.lineString(newProject.coordinates.map(fromLatLng));
+          var currentRouteBuffer = turf.buffer(currentRoute, 5, 'meters');
+          var conflicts = projects.filter(function (project) {
+              var route = turf.lineString(project.coordinates.map(fromLatLng));
+              var routeBuffer = turf.buffer(route, 5, 'meters');
+              var intersection = turf.intersect(routeBuffer, currentRouteBuffer);
+              var conflictsOnArea = intersection != undefined && turf.area(intersection) > 100;
+              var conflictsOnTime = dateRangesOverlaps(newProject.startDate, newProject.endDate, project.startDate, project.endDate);
+              return conflictsOnArea && conflictsOnTime;
+          });
+
+          return conflicts;
+      }
+
+      function displayConflicts(conflicts, map) {
+          if (conflicts.length > 0) {
+              conflicts.forEach(function (project) {
+                  var polyline = L.polyline(project.coordinates).addTo(map);
+                  var colorString = 'red';
+                  if (project.impact == 'Minor') {
+                      colorString = 'yellow';
+                  }
+                  else if (project.impact == 'Regular') {
+                      colorString = 'orange';
+                  }
+                  polyline.setStyle({
+                      color: colorString,
+                      weight: 8
+                  });
+                  map.polylines.push(polyline);
+              });
+          }
+      }
+
+      function dateRangesOverlaps(a_start, a_end, b_start, b_end) {
+          if (a_start <= b_start && b_start <= a_end) return true; // b starts in a
+          if (a_start <= b_end   && b_end   <= a_end) return true; // b ends in a
+          if (b_start <  a_start && a_end   <  b_end) return true; // a in b
+          return false;
+      }
+
+      function toLatLng(array) {
+          return L.latLng(array[0], array[1]);
+      }
+
+      function fromLatLng(latLng) {
+          return [latLng.lat, latLng.lng];
+      }
+
+      var projectIdCounter = 1337;
+
+      function createProjectAction() {
+          if (projectCreationMap.selectedPoints.length <= 1) {
+              alert('Please select street on map');
+              return;
+          }
+
+          tmpProject = null;
+          var project = {
+              id: projectIdCounter,
+              startDate: new Date($('#datestart').val()),
+              endDate: new Date($('#dateend').val()),
+              company: "MyCompany",
+              type: $('#project_type').val(),
+              impact: $('#impact').val(),
+              description: $('#additional').val(),
+              manager: $('#contact_person').val(),
+              coordinates: projectCreationMap.selectedPoints
+          };
+          var conflicts = calculateConflicts(project, projectCreationMap);
+          if (conflicts.length > 0) {
+              tmpProject = project;
+              displayConflicts(conflicts, projectCreationMap);
+              document.getElementById('disable').click();
+              document.getElementById('enable').click();
+              var conflictCells = conflicts.map(function (project) {
+                  return '<tr><div class="alert alert-danger"><b>Conflict!</b><br>'
+                          +'Project id: '
+                          + project.id
+                          + '<br>'
+                          +'Contact person: '
+                          + project.manager
+                          +'</div>';
+              }).join("");
+
+              $('#conflictTable').html('<table>' + conflictCells +'</table>');
+          }
+          else {
+              projectIdCounter++;
+              projects.push(project);
+              clearMap(projectCreationMap);
+              clearForm();
+              alert("Project Created Successfully");
+          }
+      }
+
+      function forceSaveProject() {
+          projects.push(tmpProject);
+          clearMap(projectCreationMap);
+          clearForm();
+          tmpProject = null;
+      }
+
+      function clearForm() {
+          var date = new Date();
+          $('#datestart').val(date.toISOString().substr(0, 10));
+          date.setDate(date.getDate() + 1);
+          $('#dateend').val(date.toISOString().substr(0, 10));
+          $('#project_type').val("Construction");
+          $('#impact').val("Major");
+          $('#additional').val("Sample description");
+          $('#contact_person').val("John Doe");
+      }
+
+      var streetsLayer;
+      function populateStreetsOverlay() {
+          var numberOfColors = 10;
+          var rainbow = new Rainbow();
+          rainbow.setNumberRange(1, numberOfColors);
+          rainbow.setSpectrum('red', 'yellow', 'green');
+          streetsLayer = L.geoJSON(streetsData, {
+              style: function (feature) {
+                  var overall = feature.properties.overall;
+                  return {
+                      color: '#' + rainbow.colorAt(overall - 1),
+                      opacity: 0.5
+                  };
+              }
+          }).addTo(projectCreationMap);
+      }
+  </script>
+
+  <script>
+      $(document).ready(function() {
+          clearForm();
+          populateStreetsOverlay();
+      });
+  </script>
+
+  </body>
+</html>
